@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Semesters — SBTE 2.0</title>
+<meta name="description" content="Browse semesters and subjects for your engineering branch on SBTE 2.0." />
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+<meta name="theme-color" content="#0a0e13" />
+<link rel="apple-touch-icon" href="/assets/logo.jpg" />
+<link rel="manifest" href="/manifest.json" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SBTE 2.0" />
+<meta property="og:title" content="Semesters — SBTE 2.0" />
+<meta property="og:description" content="Browse semesters and subjects for your engineering branch on SBTE 2.0." />
+<meta property="og:image" content="/assets/logo.jpg" />
+<meta name="twitter:card" content="summary" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/responsive.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<canvas id="bg-canvas"></canvas>
+<div class="bg-grid"></div>
+
+<header class="site-header" id="site-header"></header>
+
+<nav class="crumb-strip" aria-label="Breadcrumb">
+  <div class="container">
+    <div class="crumb" id="crumb"></div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <div class="section-head" id="branch-head">
+      <span class="eyebrow">Step 2 of 4</span>
+      <h2 id="branch-title">Loading&hellip;</h2>
+      <p id="branch-tagline"></p>
+    </div>
+    <div class="grid grid--tight" id="semester-grid" aria-live="polite"></div>
+  </div>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/navigation.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/three-background.js"></script>
+<script src="/js/animations.js"></script>
+<script>
+  async function initBranchPage() {
+    const grid = document.getElementById("semester-grid");
+    const crumbEl = document.getElementById("crumb");
+
+    let curriculum;
+    try {
+      curriculum = await Api.getCurriculum();
+    } catch (e) {
+      renderEmptyState(grid, { title: "Couldn't load the curriculum", message: e.message, isError: true, iconName: "alert" });
+      return;
+    }
+
+    const branchId = Nav.param("branch");
+    const branch = Nav.findBranch(curriculum, branchId);
+
+    if (!branch) {
+      document.getElementById("branch-head").style.display = "none";
+      renderEmptyState(grid, {
+        title: "Branch not found",
+        message: "That branch link looks wrong or out of date. Pick a branch from the home page instead.",
+        isError: true, iconName: "alert",
+      });
+      return;
+    }
+
+    document.title = `${branch.name} — SBTE 2.0`;
+    document.getElementById("branch-title").textContent = branch.name;
+    document.getElementById("branch-tagline").textContent = branch.tagline;
+    Nav.renderCrumbs(crumbEl, { branch });
+
+    grid.innerHTML = branch.semesters.map((sem) => {
+      const subjectCount = sem.subjects.length;
+      return `
+        <a class="card stampable" style="--accent:${branch.accent}" href="${Nav.buildUrl('/pages/semester.html', { branch: branch.id, sem: sem.number })}">
+          <span class="card__index">SEM ${Nav.romanSemester(sem.number)}</span>
+          <div class="card__title">Semester ${Nav.romanSemester(sem.number)}</div>
+          <div class="card__desc">${subjectCount} subject${subjectCount === 1 ? "" : "s"}</div>
+          <div class="card__foot"><span>Notes &middot; PYQ &middot; Practical</span>${icon("chevron")}</div>
+        </a>`;
+    }).join("");
+
+    Animate.revealCards("#semester-grid .card");
+  }
+  document.addEventListener("DOMContentLoaded", initBranchPage);
+</script>
+</body>
+</html>

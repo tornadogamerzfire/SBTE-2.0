@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SBTE 2.0 — State Board of Technical Education</title>
+<meta name="description" content="Notes, previous year questions and practicals for every branch and semester — organized like a drawing register, updated the moment a PDF is added." />
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+<meta name="theme-color" content="#0a0e13" />
+<link rel="apple-touch-icon" href="/assets/logo.jpg" />
+<link rel="manifest" href="/manifest.json" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SBTE 2.0" />
+<meta property="og:title" content="SBTE 2.0 — State Board of Technical Education" />
+<meta property="og:description" content="Notes, previous year questions and practicals for every branch and semester — organized like a drawing register, updated the moment a PDF is added." />
+<meta property="og:image" content="/assets/logo.jpg" />
+<meta name="twitter:card" content="summary" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/responsive.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<canvas id="bg-canvas"></canvas>
+<div class="bg-grid"></div>
+
+<header class="site-header" id="site-header"></header>
+
+<main id="main-content">
+  <section class="hero">
+    <div class="container">
+      <div class="hero__block">
+        <div>
+          <div class="eyebrow js-reveal" id="hero-kicker">SBTE&nbsp;2.0 &middot; ALL BRANCHES &middot; ALL SEMESTERS</div>
+          <h1 class="js-reveal" id="hero-title">Notes, PYQs &amp; practicals, <em>filed like a drawing register.</em></h1>
+          <p class="lede js-reveal" id="hero-lede">Pick a branch, then a semester, then a subject — every PDF is detected straight from the folder the moment it's added, no rebuild needed.</p>
+          <div class="hero__actions js-reveal" id="hero-actions">
+            <a href="#branches" class="btn btn--primary stampable">Browse branches</a>
+            <a href="/pages/search.html" class="btn btn--ghost stampable">Search subjects</a>
+          </div>
+          <div class="stat-strip">
+            <div class="stat-strip__item"><span class="stat-strip__num">05</span><span class="stat-strip__label">Branches</span></div>
+            <div class="stat-strip__item"><span class="stat-strip__num">06</span><span class="stat-strip__label">Semesters each</span></div>
+            <div class="stat-strip__item"><span class="stat-strip__num">03</span><span class="stat-strip__label">Notes &middot; PYQ &middot; Practical</span></div>
+          </div>
+        </div>
+        <div class="hero__titleblock-wrap js-reveal" id="hero-titleblock">
+          <div class="title-block">
+            <div class="title-block__row">
+              <div class="title-block__cell">
+                <span class="title-block__label">Drawing</span>
+                <span class="title-block__value">SBTE 2.0</span>
+              </div>
+            </div>
+            <div class="title-block__row">
+              <div class="title-block__cell">
+                <span class="title-block__label">Title</span>
+                <span class="title-block__value">State Board of Technical Education 2.0</span>
+              </div>
+            </div>
+            <div class="title-block__row">
+              <div class="title-block__cell">
+                <span class="title-block__label">Scale</span>
+                <span class="title-block__value">N.T.S.</span>
+              </div>
+              <div class="title-block__cell">
+                <span class="title-block__label">Sheet</span>
+                <span class="title-block__value">1 / 1</span>
+              </div>
+              <div class="title-block__cell">
+                <span class="title-block__label">Rev</span>
+                <span class="title-block__value title-block__value--accent">2.0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="branches">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Step 1 of 4</span>
+        <h2>Choose your branch</h2>
+        <p>Each branch keeps its own independent set of notes, PYQs and practicals.</p>
+      </div>
+      <div class="grid" id="branch-grid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>Branch &rarr; Semester &rarr; Subject &rarr; Resource</h2>
+      </div>
+      <div class="grid grid--tight">
+        <div class="card">
+          <span class="card__index">01</span>
+          <div class="card__title">Pick a branch &amp; semester</div>
+          <div class="card__desc">Five branches, six semesters each, exactly as published on the syllabus.</div>
+        </div>
+        <div class="card">
+          <span class="card__index">02</span>
+          <div class="card__title">Open a subject</div>
+          <div class="card__desc">Elective groups like Open Electives / COE open a short options list first.</div>
+        </div>
+        <div class="card">
+          <span class="card__index">03</span>
+          <div class="card__title">Choose Notes, PYQ or Practical</div>
+          <div class="card__desc">Each subject keeps its three resource types in separate registers.</div>
+        </div>
+        <div class="card">
+          <span class="card__index">04</span>
+          <div class="card__title">Open or download the PDF</div>
+          <div class="card__desc">Files are read live from the folder — nothing is pre-indexed or cached stale.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/navigation.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/three-background.js"></script>
+<script src="/js/animations.js"></script>
+<script>
+  async function initHome() {
+    const grid = document.getElementById("branch-grid");
+    try {
+      const branches = await Api.getBranches();
+      grid.innerHTML = branches.map((b) => `
+        <a class="card stampable" style="--accent:${b.accent}" href="${Nav.buildUrl('/pages/branch.html', { branch: b.id })}">
+          <div class="card__icon">${icon(b.icon)}</div>
+          <div class="card__title">${Nav.escapeHtml(b.name)}</div>
+          <div class="card__desc">${Nav.escapeHtml(b.tagline)}</div>
+          <div class="card__foot"><span>6 semesters</span>${icon("chevron")}</div>
+        </a>`).join("");
+      Animate.revealCards("#branch-grid .card");
+    } catch (e) {
+      renderEmptyState(grid, {
+        title: "Couldn't load branches",
+        message: e.message,
+        isError: true,
+        iconName: "alert",
+      });
+    }
+
+    Animate.heroSequence({
+      kicker: document.getElementById("hero-kicker"),
+      title: document.getElementById("hero-title"),
+      lede: document.getElementById("hero-lede"),
+      actions: document.getElementById("hero-actions"),
+      titleBlock: document.getElementById("hero-titleblock"),
+    });
+  }
+  document.addEventListener("DOMContentLoaded", initHome);
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+/* =========================================================================
+   Responsive overrides. Loaded after style.css so these rules win.
+   ========================================================================= */
+
+@media (max-width: 960px) {
+  .hero__block { grid-template-columns: 1fr; }
+  .hero__titleblock-wrap { justify-content: flex-start; }
+  .hero__titleblock-wrap .title-block { max-width: 360px; }
+}
+
+@media (max-width: 860px) {
+  .main-nav { display: none; }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 38px; height: 38px;
+    border: 1px solid var(--hairline-strong);
+    border-radius: var(--radius-sm);
+    margin-left: var(--sp-2);
+  }
+  .menu-toggle svg { width: 18px; height: 18px; }
+
+  .header-search { min-width: 0; flex: 1; max-width: 200px; }
+}
+
+@media (max-width: 600px) {
+  /* A 220px-min search box has nowhere to go once the logo + hamburger
+     are accounted for on a narrow phone -- it was shrinking to an
+     unusable ~50px sliver. Collapse it to an icon-only button that jumps
+     straight to the full search page instead. */
+  .header-search {
+    min-width: 0;
+    max-width: none;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+  .header-search input { display: none; }
+}
+
+/* Short / landscape viewports (phones rotated sideways): the hero's
+   default vertical padding was written for a tall portrait screen and
+   pushes content awkwardly far down when there's only ~360px of height
+   to work with. */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hero { padding: var(--sp-6) 0 var(--sp-5); }
+  .stat-strip { margin-top: var(--sp-5); }
+  .hero__block { align-items: center; }
+}
+
+@media (max-width: 720px) {
+  .container { padding: 0 var(--sp-4); }
+  .hero { padding: var(--sp-7) 0 var(--sp-6); }
+  .hero p.lede { font-size: 15.5px; }
+  .stat-strip { gap: var(--sp-5); }
+
+  .register__head { display: none; }
+  .register-row {
+    grid-template-columns: 1fr;
+    gap: var(--sp-2);
+    padding: var(--sp-4);
+  }
+  .register-row__size::before { content: "Size: "; color: var(--graphite); }
+  .register-row__date::before { content: "Added: "; color: var(--graphite); }
+  .register-row__actions { justify-content: flex-start; margin-top: var(--sp-1); }
+
+  .resource-grid { grid-template-columns: 1fr; }
+
+  .site-footer .container { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr; }
+  .hero h1 { max-width: 100%; }
+  .not-found .stamp { font-size: 64px; }
+}
+
+/* Landscape phones / small tablets: keep branch grid at 2 columns */
+@media (min-width: 521px) and (max-width: 720px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}

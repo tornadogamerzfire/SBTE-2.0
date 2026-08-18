@@ -1,0 +1,14 @@
+{
+  "name": "SBTE 2.0 — State Board of Technical Education",
+  "short_name": "SBTE 2.0",
+  "description": "Notes, PYQs and practicals for every branch and semester.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0e13",
+  "theme_color": "#0a0e13",
+  "icons": [
+    { "src": "/assets/icons/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/assets/logo.jpg", "sizes": "512x512", "type": "image/jpeg", "purpose": "any" }
+  ]
+}

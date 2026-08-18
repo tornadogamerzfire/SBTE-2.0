@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Documents — SBTE 2.0</title>
+<meta name="description" content="Notes, PYQ and practical PDFs for this subject on SBTE 2.0." />
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+<meta name="theme-color" content="#0a0e13" />
+<link rel="apple-touch-icon" href="/assets/logo.jpg" />
+<link rel="manifest" href="/manifest.json" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SBTE 2.0" />
+<meta property="og:title" content="Documents — SBTE 2.0" />
+<meta property="og:description" content="Notes, PYQ and practical PDFs for this subject on SBTE 2.0." />
+<meta property="og:image" content="/assets/logo.jpg" />
+<meta name="twitter:card" content="summary" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/responsive.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<canvas id="bg-canvas"></canvas>
+<div class="bg-grid"></div>
+
+<header class="site-header" id="site-header"></header>
+
+<nav class="crumb-strip" aria-label="Breadcrumb">
+  <div class="container">
+    <div class="crumb" id="crumb"></div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <div class="section-head" id="res-head">
+      <span class="eyebrow" id="res-type-badge">Loading&hellip;</span>
+      <h2 id="res-title">Loading&hellip;</h2>
+      <p id="res-sub"></p>
+    </div>
+    <div id="res-body" aria-live="polite">
+      <div class="register">
+        <div class="register__head"><span>Document</span><span>Size</span><span>Added</span><span></span></div>
+        <div class="register-row"><div class="skeleton" style="height:16px;width:70%"></div></div>
+        <div class="register-row"><div class="skeleton" style="height:16px;width:55%"></div></div>
+        <div class="register-row"><div class="skeleton" style="height:16px;width:65%"></div></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/navigation.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/three-background.js"></script>
+<script src="/js/animations.js"></script>
+<script>
+  async function initResourcesPage() {
+    const body = document.getElementById("res-body");
+    const crumbEl = document.getElementById("crumb");
+    const p = Nav.params();
+    const branchId = p.get("branch"), sem = p.get("sem"), subjectId = p.get("subject"),
+      electiveId = p.get("elective"), type = p.get("type");
+
+    const RESOURCE_TYPES = ["notes", "pyq", "practical"];
+    if (!branchId || !sem || !subjectId || !RESOURCE_TYPES.includes(type)) {
+      document.getElementById("res-head").style.display = "none";
+      renderEmptyState(body, { title: "Missing information", message: "That link is incomplete or invalid. Start again from the subject page.", isError: true, iconName: "alert" });
+      return;
+    }
+
+    document.getElementById("res-type-badge").textContent = Nav.resourceLabel(type);
+
+    // Curriculum drives the header/breadcrumb (names, validation); the
+    // /api/resources call is what actually reads the folder.
+    let curriculum;
+    try {
+      curriculum = await Api.getCurriculum();
+    } catch (e) {
+      renderEmptyState(body, { title: "Couldn't load the curriculum", message: e.message, isError: true, iconName: "alert" });
+      return;
+    }
+
+    const resolved = Nav.resolveFromParams(curriculum);
+    if (!resolved || !resolved.subject || (resolved.subject.type === "special" && !resolved.elective)) {
+      document.getElementById("res-head").style.display = "none";
+      renderEmptyState(body, { title: "Subject not found", message: "That link looks wrong or out of date.", isError: true, iconName: "alert" });
+      return;
+    }
+    resolved.type = type;
+
+    const displayName = resolved.elective ? resolved.elective.name : resolved.subject.name;
+    document.title = `${Nav.resourceLabel(type)} \u2014 ${displayName} \u2014 SBTE 2.0`;
+    document.getElementById("res-title").textContent = `${Nav.resourceLabel(type)} \u2014 ${displayName}`;
+    document.getElementById("res-sub").textContent = `${resolved.branch.name} \u2014 Semester ${Nav.romanSemester(resolved.semester.number)}`;
+    Nav.renderCrumbs(crumbEl, resolved);
+
+    try {
+      const data = await Api.getResources({
+        branch: branchId, sem, subject: subjectId, elective: electiveId, type,
+      });
+
+      if (!data.files.length) {
+        renderEmptyState(body, {
+          title: "No PDFs uploaded yet",
+          message: `Nothing's been added to this folder yet. Drop a PDF into the matching ${type} folder on the server and it'll show up here automatically.`,
+          iconName: "empty",
+        });
+        return;
+      }
+
+      body.innerHTML = `
+        <div class="register">
+          <div class="register__head"><span>Document</span><span>Size</span><span>Added</span><span></span></div>
+          ${data.files.map((f) => {
+            const viewHref = Nav.buildUrl("/pages/pdf-viewer.html", { branch: branchId, sem, subject: subjectId, elective: electiveId, type, file: f.filename });
+            const downloadHref = Api.pdfUrl({ branch: branchId, sem, subject: subjectId, elective: electiveId, type, file: f.filename });
+            return `
+              <div class="register-row">
+                <a class="register-row__name" href="${viewHref}">
+                  ${icon(type)}
+                  <span>${Nav.escapeHtml(f.display_name)}</span>
+                </a>
+                <span class="register-row__size">${formatSize(f.size_kb)}</span>
+                <span class="register-row__date">${formatDate(f.modified)}</span>
+                <span class="register-row__actions">
+                  <a href="${viewHref}" aria-label="Open ${Nav.escapeHtml(f.display_name)}" title="Open">${icon("external")}</a>
+                  <a href="${downloadHref}" download="${f.filename}" aria-label="Download ${Nav.escapeHtml(f.display_name)}" title="Download">${icon("download")}</a>
+                </span>
+              </div>`;
+          }).join("")}
+        </div>`;
+      Animate.fadeIn(body.querySelector(".register"));
+    } catch (e) {
+      renderEmptyState(body, { title: "Couldn't load documents", message: e.message, isError: true, iconName: "alert" });
+    }
+  }
+  document.addEventListener("DOMContentLoaded", initResourcesPage);
+</script>
+</body>
+</html>

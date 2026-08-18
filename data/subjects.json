@@ -1,0 +1,1602 @@
+{
+  "branches": [
+    {
+      "id": "civil",
+      "name": "Civil Engineering",
+      "folder": "Civil Engineering",
+      "tagline": "Structures, surveying & sustainable infrastructure",
+      "accent": "#d4a657",
+      "icon": "civil",
+      "semesters": [
+        {
+          "number": 1,
+          "subjects": [
+            {
+              "id": "basic-engg-mathematics",
+              "name": "Basic Engg. Mathematics",
+              "folder": "Basic Engg. Mathematics",
+              "type": "normal"
+            },
+            {
+              "id": "applied-chemistry-a",
+              "name": "Applied Chemistry -A",
+              "folder": "Applied Chemistry -A",
+              "type": "normal"
+            },
+            {
+              "id": "fundamentals-of-mechanical-engg",
+              "name": "Fundamentals of Mechanical Engg.",
+              "folder": "Fundamentals of Mechanical Engg",
+              "type": "normal"
+            },
+            {
+              "id": "communication-skills-english",
+              "name": "Communication Skills (English)",
+              "folder": "Communication Skills (English)",
+              "type": "normal"
+            },
+            {
+              "id": "engg-drawing-graphics",
+              "name": "Engg. Drawing & Graphics",
+              "folder": "Engg. Drawing & Graphics",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "subjects": [
+            {
+              "id": "applied-physics-a",
+              "name": "Applied Physics -A",
+              "folder": "Applied Physics -A",
+              "type": "normal"
+            },
+            {
+              "id": "python-programming",
+              "name": "Python Programming",
+              "folder": "Python Programming",
+              "type": "normal"
+            },
+            {
+              "id": "engg-mechanics",
+              "name": "Engg. Mechanics",
+              "folder": "Engg. Mechanics",
+              "type": "normal"
+            },
+            {
+              "id": "applied-mathematics-a",
+              "name": "Applied Mathematics -A",
+              "folder": "Applied Mathematics -A",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "subjects": [
+            {
+              "id": "basic-surveying",
+              "name": "Basic Surveying",
+              "folder": "Basic Surveying",
+              "type": "normal"
+            },
+            {
+              "id": "concrete-technology",
+              "name": "Concrete Technology",
+              "folder": "Concrete Technology",
+              "type": "normal"
+            },
+            {
+              "id": "strength-of-material-for-civil-engg",
+              "name": "Strength of Material for Civil Engg.",
+              "folder": "Strength of Material for Civil Engg",
+              "type": "normal"
+            },
+            {
+              "id": "building-construction-material",
+              "name": "Building Construction & Material",
+              "folder": "Building Construction & Material",
+              "type": "normal"
+            },
+            {
+              "id": "water-resource-engg",
+              "name": "Water Resource Engg.",
+              "folder": "Water Resource Engg",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "subjects": [
+            {
+              "id": "advance-surveying",
+              "name": "Advance Surveying",
+              "folder": "Advance Surveying",
+              "type": "normal"
+            },
+            {
+              "id": "theory-of-structure",
+              "name": "Theory of Structure",
+              "folder": "Theory of Structure",
+              "type": "normal"
+            },
+            {
+              "id": "building-planning-and-drawing-with-auto-cad",
+              "name": "Building Planning and Drawing with Auto CAD",
+              "folder": "Building Planning and Drawing with Auto CAD",
+              "type": "normal"
+            },
+            {
+              "id": "soil-mechanics-foundation",
+              "name": "Soil Mechanics & Foundation",
+              "folder": "Soil Mechanics & Foundation",
+              "type": "normal"
+            },
+            {
+              "id": "transportation-engg",
+              "name": "Transportation Engg.",
+              "folder": "Transportation Engg",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "subjects": [
+            {
+              "id": "hydraulics",
+              "name": "Hydraulics",
+              "folder": "Hydraulics",
+              "type": "normal"
+            },
+            {
+              "id": "rcc-structure",
+              "name": "RCC Structure",
+              "folder": "RCC Structure",
+              "type": "normal"
+            },
+            {
+              "id": "estimating-costing-contracts",
+              "name": "Estimating, Costing & Contracts",
+              "folder": "Estimating, Costing & Contracts",
+              "type": "normal"
+            },
+            {
+              "id": "open-electives-coe",
+              "name": "Open Electives / COE",
+              "folder": "Open Electives - COE",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-basic",
+                  "name": "Artificial Intelligence (Basic)",
+                  "folder": "Artificial Intelligence (Basic)"
+                },
+                {
+                  "id": "internet-of-things-basic",
+                  "name": "Internet of Things (Basic)",
+                  "folder": "Internet of Things (Basic)"
+                },
+                {
+                  "id": "drone-technology-basic",
+                  "name": "Drone Technology (Basic)",
+                  "folder": "Drone Technology (Basic)"
+                },
+                {
+                  "id": "3d-printing-and-design-basic",
+                  "name": "3D Printing and Design (Basic)",
+                  "folder": "3D Printing and Design (Basic)"
+                },
+                {
+                  "id": "industrial-automation-basic",
+                  "name": "Industrial Automation (Basic)",
+                  "folder": "Industrial Automation (Basic)"
+                },
+                {
+                  "id": "electric-vehicle-basic",
+                  "name": "Electric Vehicle (Basic)",
+                  "folder": "Electric Vehicle (Basic)"
+                },
+                {
+                  "id": "robotics-basic",
+                  "name": "Robotics (Basic)",
+                  "folder": "Robotics (Basic)"
+                },
+                {
+                  "id": "transformer-manufacturing-and-repairing-basic",
+                  "name": "Transformer Manufacturing and Repairing (Basic)",
+                  "folder": "Transformer Manufacturing and Repairing (Basic)"
+                },
+                {
+                  "id": "optical-fiber-and-5g-communication-basic",
+                  "name": "Optical Fiber and 5G Communication (Basic)",
+                  "folder": "Optical Fiber and 5G Communication (Basic)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "subjects": [
+            {
+              "id": "environmental-engg",
+              "name": "Environmental Engg.",
+              "folder": "Environmental Engg",
+              "type": "normal"
+            },
+            {
+              "id": "steel-structure",
+              "name": "Steel Structure",
+              "folder": "Steel Structure",
+              "type": "normal"
+            },
+            {
+              "id": "programme-electives",
+              "name": "Programme Electives",
+              "folder": "Programme Electives",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "pre-stress-and-precast-concrete",
+                  "name": "Pre-Stress and Precast Concrete",
+                  "folder": "Pre-Stress and Precast Concrete"
+                },
+                {
+                  "id": "traffic-engineering-and-pavement-design",
+                  "name": "Traffic Engineering and Pavement Design",
+                  "folder": "Traffic Engineering and Pavement Design"
+                },
+                {
+                  "id": "green-building-and-sustainability",
+                  "name": "Green Building and Sustainability",
+                  "folder": "Green Building and Sustainability"
+                },
+                {
+                  "id": "water-and-waste-water-management",
+                  "name": "Water and Waste Water Management",
+                  "folder": "Water and Waste Water Management"
+                }
+              ]
+            },
+            {
+              "id": "open-electives-coe",
+              "name": "Open Electives / COE",
+              "folder": "Open Electives - COE",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-advanced",
+                  "name": "Artificial Intelligence (Advanced)",
+                  "folder": "Artificial Intelligence (Advanced)"
+                },
+                {
+                  "id": "internet-of-things-advanced",
+                  "name": "Internet of Things (Advanced)",
+                  "folder": "Internet of Things (Advanced)"
+                },
+                {
+                  "id": "drone-technology-advanced",
+                  "name": "Drone Technology (Advanced)",
+                  "folder": "Drone Technology (Advanced)"
+                },
+                {
+                  "id": "3d-printing-and-design-advanced",
+                  "name": "3D Printing and Design (Advanced)",
+                  "folder": "3D Printing and Design (Advanced)"
+                },
+                {
+                  "id": "industrial-automation-advanced",
+                  "name": "Industrial Automation (Advanced)",
+                  "folder": "Industrial Automation (Advanced)"
+                },
+                {
+                  "id": "electric-vehicle-advanced",
+                  "name": "Electric Vehicle (Advanced)",
+                  "folder": "Electric Vehicle (Advanced)"
+                },
+                {
+                  "id": "robotics-advanced",
+                  "name": "Robotics (Advanced)",
+                  "folder": "Robotics (Advanced)"
+                },
+                {
+                  "id": "transformer-manufacturing-and-repairing-advanced",
+                  "name": "Transformer Manufacturing and Repairing (Advanced)",
+                  "folder": "Transformer Manufacturing and Repairing (Advanced)"
+                },
+                {
+                  "id": "optical-fiber-and-5g-communication-advanced",
+                  "name": "Optical Fiber and 5G Communication (Advanced)",
+                  "folder": "Optical Fiber and 5G Communication (Advanced)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cse",
+      "name": "Computer Science and Engineering",
+      "folder": "Computer Science and Engineering",
+      "tagline": "Code, data & intelligent systems",
+      "accent": "#3fa9f5",
+      "icon": "cse",
+      "semesters": [
+        {
+          "number": 1,
+          "subjects": [
+            {
+              "id": "basic-engg-mathematics",
+              "name": "Basic Engg. Mathematics",
+              "folder": "Basic Engg. Mathematics",
+              "type": "normal"
+            },
+            {
+              "id": "applied-physics-b",
+              "name": "Applied Physics -B",
+              "folder": "Applied Physics -B",
+              "type": "normal"
+            },
+            {
+              "id": "fundamentals-of-electrical-and-electronic-engg",
+              "name": "Fundamentals of Electrical and Electronic Engg.",
+              "folder": "Fundamentals of Electrical and Electronic Engg",
+              "type": "normal"
+            },
+            {
+              "id": "introduction-to-artificial-intelligence",
+              "name": "Introduction to Artificial Intelligence",
+              "folder": "Introduction to Artificial Intelligence",
+              "type": "normal"
+            },
+            {
+              "id": "ict-tools",
+              "name": "ICT Tools",
+              "folder": "ICT Tools",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "subjects": [
+            {
+              "id": "programming-with-c",
+              "name": "Programming with C",
+              "folder": "Programming with C",
+              "type": "normal"
+            },
+            {
+              "id": "web-technology",
+              "name": "Web Technology",
+              "folder": "Web Technology",
+              "type": "normal"
+            },
+            {
+              "id": "applied-chemistry-b",
+              "name": "Applied Chemistry -B",
+              "folder": "Applied Chemistry -B",
+              "type": "normal"
+            },
+            {
+              "id": "communication-skills-english",
+              "name": "Communication Skills (English)",
+              "folder": "Communication Skills (English)",
+              "type": "normal"
+            },
+            {
+              "id": "applied-mathematics-b",
+              "name": "Applied Mathematics -B",
+              "folder": "Applied Mathematics -B",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "subjects": [
+            {
+              "id": "data-structures-and-algorithm",
+              "name": "Data Structures and Algorithm",
+              "folder": "Data Structures and Algorithm",
+              "type": "normal"
+            },
+            {
+              "id": "operating-system",
+              "name": "Operating System",
+              "folder": "Operating System",
+              "type": "normal"
+            },
+            {
+              "id": "discrete-structures",
+              "name": "Discrete Structures",
+              "folder": "Discrete Structures",
+              "type": "normal"
+            },
+            {
+              "id": "digital-electronics-microprocessor",
+              "name": "Digital Electronics & Microprocessor",
+              "folder": "Digital Electronics & Microprocessor",
+              "type": "normal"
+            },
+            {
+              "id": "python-programming",
+              "name": "Python Programming",
+              "folder": "Python Programming",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "subjects": [
+            {
+              "id": "java-programming",
+              "name": "Java Programming",
+              "folder": "Java Programming",
+              "type": "normal"
+            },
+            {
+              "id": "theory-of-computation",
+              "name": "Theory of Computation",
+              "folder": "Theory of Computation",
+              "type": "normal"
+            },
+            {
+              "id": "database-management-system",
+              "name": "Database Management System",
+              "folder": "Database Management System",
+              "type": "normal"
+            },
+            {
+              "id": "computer-organization-and-architecture",
+              "name": "Computer Organization and Architecture",
+              "folder": "Computer Organization and Architecture",
+              "type": "normal"
+            },
+            {
+              "id": "computer-troubleshooting-and-maintenance",
+              "name": "Computer Troubleshooting and Maintenance",
+              "folder": "Computer Troubleshooting and Maintenance",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "subjects": [
+            {
+              "id": "data-communication-and-computer-network",
+              "name": "Data Communication and Computer Network",
+              "folder": "Data Communication and Computer Network",
+              "type": "normal"
+            },
+            {
+              "id": "software-engineering",
+              "name": "Software Engineering",
+              "folder": "Software Engineering",
+              "type": "normal"
+            },
+            {
+              "id": "programme-electives",
+              "name": "Programme Electives",
+              "folder": "Programme Electives",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "data-science-data-warehousing-and-data-mining",
+                  "name": "Data Science: Data Warehousing and Data Mining",
+                  "folder": "Data Science - Data Warehousing and Data Mining"
+                },
+                {
+                  "id": "advanced-java-programming",
+                  "name": "Advanced JAVA Programming",
+                  "folder": "Advanced JAVA Programming"
+                }
+              ]
+            },
+            {
+              "id": "open-electives-coe",
+              "name": "Open Electives / COE",
+              "folder": "Open Electives - COE",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-basic",
+                  "name": "Artificial Intelligence (Basic)",
+                  "folder": "Artificial Intelligence (Basic)"
+                },
+                {
+                  "id": "internet-of-things-basic",
+                  "name": "Internet of Things (Basic)",
+                  "folder": "Internet of Things (Basic)"
+                },
+                {
+                  "id": "drone-technology-basic",
+                  "name": "Drone Technology (Basic)",
+                  "folder": "Drone Technology (Basic)"
+                },
+                {
+                  "id": "3d-printing-and-design-basic",
+                  "name": "3D Printing and Design (Basic)",
+                  "folder": "3D Printing and Design (Basic)"
+                },
+                {
+                  "id": "industrial-automation-basic",
+                  "name": "Industrial Automation (Basic)",
+                  "folder": "Industrial Automation (Basic)"
+                },
+                {
+                  "id": "electric-vehicle-basic",
+                  "name": "Electric Vehicle (Basic)",
+                  "folder": "Electric Vehicle (Basic)"
+                },
+                {
+                  "id": "robotics-basic",
+                  "name": "Robotics (Basic)",
+                  "folder": "Robotics (Basic)"
+                },
+                {
+                  "id": "transformer-manufacturing-and-repairing-basic",
+                  "name": "Transformer Manufacturing and Repairing (Basic)",
+                  "folder": "Transformer Manufacturing and Repairing (Basic)"
+                },
+                {
+                  "id": "optical-fiber-and-5g-communication-basic",
+                  "name": "Optical Fiber and 5G Communication (Basic)",
+                  "folder": "Optical Fiber and 5G Communication (Basic)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "subjects": [
+            {
+              "id": "cloud-computing",
+              "name": "Cloud Computing",
+              "folder": "Cloud Computing",
+              "type": "normal"
+            },
+            {
+              "id": "computer-network-with-linux-windows",
+              "name": "Computer Network with Linux & Windows",
+              "folder": "Computer Network with Linux & Windows",
+              "type": "normal"
+            },
+            {
+              "id": "programme-electives",
+              "name": "Programme Electives",
+              "folder": "Programme Electives",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "introduction-to-machine-learning",
+                  "name": "Introduction to Machine Learning",
+                  "folder": "Introduction to Machine Learning"
+                },
+                {
+                  "id": "mobile-application-development",
+                  "name": "Mobile Application Development",
+                  "folder": "Mobile Application Development"
+                }
+              ]
+            },
+            {
+              "id": "open-electives-coe",
+              "name": "Open Electives / COE",
+              "folder": "Open Electives - COE",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-advanced",
+                  "name": "Artificial Intelligence (Advanced)",
+                  "folder": "Artificial Intelligence (Advanced)"
+                },
+                {
+                  "id": "internet-of-things-advanced",
+                  "name": "Internet of Things (Advanced)",
+                  "folder": "Internet of Things (Advanced)"
+                },
+                {
+                  "id": "drone-technology-advanced",
+                  "name": "Drone Technology (Advanced)",
+                  "folder": "Drone Technology (Advanced)"
+                },
+                {
+                  "id": "3d-printing-and-design-advanced",
+                  "name": "3D Printing and Design (Advanced)",
+                  "folder": "3D Printing and Design (Advanced)"
+                },
+                {
+                  "id": "industrial-automation-advanced",
+                  "name": "Industrial Automation (Advanced)",
+                  "folder": "Industrial Automation (Advanced)"
+                },
+                {
+                  "id": "electric-vehicle-advanced",
+                  "name": "Electric Vehicle (Advanced)",
+                  "folder": "Electric Vehicle (Advanced)"
+                },
+                {
+                  "id": "robotics-advanced",
+                  "name": "Robotics (Advanced)",
+                  "folder": "Robotics (Advanced)"
+                },
+                {
+                  "id": "transformer-manufacturing-and-repairing-advanced",
+                  "name": "Transformer Manufacturing and Repairing (Advanced)",
+                  "folder": "Transformer Manufacturing and Repairing (Advanced)"
+                },
+                {
+                  "id": "optical-fiber-and-5g-communication-advanced",
+                  "name": "Optical Fiber and 5G Communication (Advanced)",
+                  "folder": "Optical Fiber and 5G Communication (Advanced)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mechanical",
+      "name": "Mechanical Engineering",
+      "folder": "Mechanical Engineering",
+      "tagline": "Machines, thermodynamics & manufacturing",
+      "accent": "#e8734a",
+      "icon": "mechanical",
+      "semesters": [
+        {
+          "number": 1,
+          "subjects": [
+            {
+              "id": "basic-engg-mathematics",
+              "name": "Basic Engg. Mathematics",
+              "folder": "Basic Engg. Mathematics",
+              "type": "normal"
+            },
+            {
+              "id": "applied-chemistry-a",
+              "name": "Applied Chemistry -A",
+              "folder": "Applied Chemistry -A",
+              "type": "normal"
+            },
+            {
+              "id": "introduction-to-artificial-intelligence",
+              "name": "Introduction to Artificial Intelligence",
+              "folder": "Introduction to Artificial Intelligence",
+              "type": "normal"
+            },
+            {
+              "id": "communication-skills-english",
+              "name": "Communication Skills (English)",
+              "folder": "Communication Skills (English)",
+              "type": "normal"
+            },
+            {
+              "id": "engineering-drawing",
+              "name": "Engineering Drawing",
+              "folder": "Engineering Drawing",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "subjects": [
+            {
+              "id": "applied-physics-a",
+              "name": "Applied Physics -A",
+              "folder": "Applied Physics -A",
+              "type": "normal"
+            },
+            {
+              "id": "fundamentals-of-electrical-and-electronic-engg",
+              "name": "Fundamentals of Electrical and Electronic Engg.",
+              "folder": "Fundamentals of Electrical and Electronic Engg",
+              "type": "normal"
+            },
+            {
+              "id": "engg-mechanics",
+              "name": "Engg. Mechanics",
+              "folder": "Engg. Mechanics",
+              "type": "normal"
+            },
+            {
+              "id": "applied-mathematics-a",
+              "name": "Applied Mathematics -A",
+              "folder": "Applied Mathematics -A",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "subjects": [
+            {
+              "id": "manufacturing-engineering",
+              "name": "Manufacturing Engineering",
+              "folder": "Manufacturing Engineering",
+              "type": "normal"
+            },
+            {
+              "id": "material-science-engineering",
+              "name": "Material Science & Engineering",
+              "folder": "Material Science & Engineering",
+              "type": "normal"
+            },
+            {
+              "id": "strength-of-materials-for-mechanical-engg",
+              "name": "Strength of Materials for Mechanical Engg.",
+              "folder": "Strength of Materials for Mechanical Engg",
+              "type": "normal"
+            },
+            {
+              "id": "basic-thermodynamics",
+              "name": "Basic Thermodynamics",
+              "folder": "Basic Thermodynamics",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "subjects": [
+            {
+              "id": "engineering-metrology-and-instrumentation",
+              "name": "Engineering Metrology and Instrumentation",
+              "folder": "Engineering Metrology and Instrumentation",
+              "type": "normal"
+            },
+            {
+              "id": "fluid-mechanics-hydraulic-machinery",
+              "name": "Fluid Mechanics & Hydraulic Machinery",
+              "folder": "Fluid Mechanics & Hydraulic Machinery",
+              "type": "normal"
+            },
+            {
+              "id": "applied-thermodynamics-and-hvac",
+              "name": "Applied Thermodynamics and HVAC",
+              "folder": "Applied Thermodynamics and HVAC",
+              "type": "normal"
+            },
+            {
+              "id": "theory-of-machines",
+              "name": "Theory of Machines",
+              "folder": "Theory of Machines",
+              "type": "normal"
+            },
+            {
+              "id": "advance-manufacturing-engineering-and-cost-estimation",
+              "name": "Advance Manufacturing Engineering and Cost Estimation",
+              "folder": "Advance Manufacturing Engineering and Cost Estimation",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "subjects": [
+            {
+              "id": "industrial-engineering-management",
+              "name": "Industrial Engineering & Management",
+              "folder": "Industrial Engineering & Management",
+              "type": "normal"
+            },
+            {
+              "id": "industrial-automation-and-mechatronics",
+              "name": "Industrial Automation and Mechatronics",
+              "folder": "Industrial Automation and Mechatronics",
+              "type": "normal"
+            },
+            {
+              "id": "hybrid-automobile-engineering",
+              "name": "Hybrid Automobile Engineering",
+              "folder": "Hybrid Automobile Engineering",
+              "type": "normal"
+            },
+            {
+              "id": "open-electives-coe",
+              "name": "Open Electives / COE",
+              "folder": "Open Electives - COE",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-basic",
+                  "name": "Artificial Intelligence (Basic)",
+                  "folder": "Artificial Intelligence (Basic)"
+                },
+                {
+                  "id": "internet-of-things-basic",
+                  "name": "Internet of Things (Basic)",
+                  "folder": "Internet of Things (Basic)"
+                },
+                {
+                  "id": "drone-technology-basic",
+                  "name": "Drone Technology (Basic)",
+                  "folder": "Drone Technology (Basic)"
+                },
+                {
+                  "id": "3d-printing-and-design-basic",
+                  "name": "3D Printing and Design (Basic)",
+                  "folder": "3D Printing and Design (Basic)"
+                },
+                {
+                  "id": "industrial-automation-basic",
+                  "name": "Industrial Automation (Basic)",
+                  "folder": "Industrial Automation (Basic)"
+                },
+                {
+                  "id": "electric-vehicle-basic",
+                  "name": "Electric Vehicle (Basic)",
+                  "folder": "Electric Vehicle (Basic)"
+                },
+                {
+                  "id": "robotics-basic",
+                  "name": "Robotics (Basic)",
+                  "folder": "Robotics (Basic)"
+                },
+                {
+                  "id": "transformer-manufacturing-and-repairing-basic",
+                  "name": "Transformer Manufacturing and Repairing (Basic)",
+                  "folder": "Transformer Manufacturing and Repairing (Basic)"
+                },
+                {
+                  "id": "optical-fiber-and-5g-communication-basic",
+                  "name": "Optical Fiber and 5G Communication (Basic)",
+                  "folder": "Optical Fiber and 5G Communication (Basic)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "subjects": [
+            {
+              "id": "design-of-machine-elements",
+              "name": "Design of Machine Elements",
+              "folder": "Design of Machine Elements",
+              "type": "normal"
+            },
+            {
+              "id": "maintenance-safety-of-mechanical-solar-appliances",
+              "name": "Maintenance & Safety of Mechanical & Solar Appliances",
+              "folder": "Maintenance & Safety of Mechanical & Solar Appliances",
+              "type": "normal"
+            },
+            {
+              "id": "programme-electives",
+              "name": "Programme Electives",
+              "folder": "Programme Electives",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "heat-and-mass-transfer",
+                  "name": "Heat and Mass Transfer",
+                  "folder": "Heat and Mass Transfer"
+                },
+                {
+                  "id": "power-plant-engineering",
+                  "name": "Power Plant Engineering",
+                  "folder": "Power Plant Engineering"
+                },
+                {
+                  "id": "press-tool-jigs-and-fixtures",
+                  "name": "Press Tool, Jigs and Fixtures",
+                  "folder": "Press Tool, Jigs and Fixtures"
+                },
+                {
+                  "id": "hydraulic-pneumatic-controls",
+                  "name": "Hydraulic & Pneumatic Controls",
+                  "folder": "Hydraulic & Pneumatic Controls"
+                },
+                {
+                  "id": "renewable-and-alternate-energy-sources",
+                  "name": "Renewable and Alternate Energy Sources",
+                  "folder": "Renewable and Alternate Energy Sources"
+                }
+              ]
+            },
+            {
+              "id": "open-electives-coe",
+              "name": "Open Electives / COE",
+              "folder": "Open Electives - COE",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-advanced",
+                  "name": "Artificial Intelligence (Advanced)",
+                  "folder": "Artificial Intelligence (Advanced)"
+                },
+                {
+                  "id": "internet-of-things-advanced",
+                  "name": "Internet of Things (Advanced)",
+                  "folder": "Internet of Things (Advanced)"
+                },
+                {
+                  "id": "drone-technology-advanced",
+                  "name": "Drone Technology (Advanced)",
+                  "folder": "Drone Technology (Advanced)"
+                },
+                {
+                  "id": "3d-printing-and-design-advanced",
+                  "name": "3D Printing and Design (Advanced)",
+                  "folder": "3D Printing and Design (Advanced)"
+                },
+                {
+                  "id": "industrial-automation-advanced",
+                  "name": "Industrial Automation (Advanced)",
+                  "folder": "Industrial Automation (Advanced)"
+                },
+                {
+                  "id": "electric-vehicle-advanced",
+                  "name": "Electric Vehicle (Advanced)",
+                  "folder": "Electric Vehicle (Advanced)"
+                },
+                {
+                  "id": "robotics-advanced",
+                  "name": "Robotics (Advanced)",
+                  "folder": "Robotics (Advanced)"
+                },
+                {
+                  "id": "transformer-manufacturing-and-repairing-advanced",
+                  "name": "Transformer Manufacturing and Repairing (Advanced)",
+                  "folder": "Transformer Manufacturing and Repairing (Advanced)"
+                },
+                {
+                  "id": "optical-fiber-and-5g-communication-advanced",
+                  "name": "Optical Fiber and 5G Communication (Advanced)",
+                  "folder": "Optical Fiber and 5G Communication (Advanced)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electrical",
+      "name": "Electrical Engineering",
+      "folder": "Electrical Engineering",
+      "tagline": "Power systems, machines & control",
+      "accent": "#f5c542",
+      "icon": "electrical",
+      "semesters": [
+        {
+          "number": 1,
+          "subjects": [
+            {
+              "id": "basic-engg-mathematics",
+              "name": "Basic Engg. Mathematics",
+              "folder": "Basic Engg. Mathematics",
+              "type": "normal"
+            },
+            {
+              "id": "applied-physics-b",
+              "name": "Applied Physics -B",
+              "folder": "Applied Physics -B",
+              "type": "normal"
+            },
+            {
+              "id": "basic-electrical-engg",
+              "name": "Basic Electrical Engg.",
+              "folder": "Basic Electrical Engg",
+              "type": "normal"
+            },
+            {
+              "id": "engg-drawing-graphics",
+              "name": "Engg. Drawing & Graphics",
+              "folder": "Engg. Drawing & Graphics",
+              "type": "normal"
+            },
+            {
+              "id": "introduction-to-artificial-intelligence",
+              "name": "Introduction to Artificial Intelligence",
+              "folder": "Introduction to Artificial Intelligence",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "subjects": [
+            {
+              "id": "fundamentals-of-electronics-engg",
+              "name": "Fundamentals of Electronics Engg.",
+              "folder": "Fundamentals of Electronics Engg",
+              "type": "normal"
+            },
+            {
+              "id": "applied-chemistry-b",
+              "name": "Applied Chemistry -B",
+              "folder": "Applied Chemistry -B",
+              "type": "normal"
+            },
+            {
+              "id": "communication-skills-english",
+              "name": "Communication Skills (English)",
+              "folder": "Communication Skills (English)",
+              "type": "normal"
+            },
+            {
+              "id": "engg-mechanics",
+              "name": "Engg. Mechanics",
+              "folder": "Engg. Mechanics",
+              "type": "normal"
+            },
+            {
+              "id": "applied-mathematics-c",
+              "name": "Applied Mathematics -C",
+              "folder": "Applied Mathematics -C",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "subjects": [
+            {
+              "id": "electrical-circuit-and-networks",
+              "name": "Electrical Circuit and Networks",
+              "folder": "Electrical Circuit and Networks",
+              "type": "normal"
+            },
+            {
+              "id": "electrical-measurements-and-instrumentation",
+              "name": "Electrical Measurements and Instrumentation",
+              "folder": "Electrical Measurements and Instrumentation",
+              "type": "normal"
+            },
+            {
+              "id": "dc-machines-and-transformers",
+              "name": "DC Machines and Transformers",
+              "folder": "DC Machines and Transformers",
+              "type": "normal"
+            },
+            {
+              "id": "electrical-power-generation-transmission-and-distribution",
+              "name": "Electrical Power Generation Transmission and Distribution",
+              "folder": "Electrical Power Generation Transmission and Distribution",
+              "type": "normal"
+            },
+            {
+              "id": "python-programming",
+              "name": "Python Programming",
+              "folder": "Python Programming",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "subjects": [
+            {
+              "id": "power-electronics",
+              "name": "Power Electronics",
+              "folder": "Power Electronics",
+              "type": "normal"
+            },
+            {
+              "id": "microprocessor-and-microcontrollers",
+              "name": "Microprocessor and Microcontrollers",
+              "folder": "Microprocessor and Microcontrollers",
+              "type": "normal"
+            },
+            {
+              "id": "ac-machines",
+              "name": "AC Machines",
+              "folder": "AC Machines",
+              "type": "normal"
+            },
+            {
+              "id": "control-system-and-plc",
+              "name": "Control System and PLC",
+              "folder": "Control System and PLC",
+              "type": "normal"
+            },
+            {
+              "id": "electrical-software-lab",
+              "name": "Electrical Software Lab",
+              "folder": "Electrical Software Lab",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "subjects": [
+            {
+              "id": "switchgear-and-protection",
+              "name": "Switchgear and Protection",
+              "folder": "Switchgear and Protection",
+              "type": "normal"
+            },
+            {
+              "id": "solar-wind-power-technology",
+              "name": "Solar & Wind Power Technology",
+              "folder": "Solar & Wind Power Technology",
+              "type": "normal"
+            },
+            {
+              "id": "energy-conservation-and-audit",
+              "name": "Energy Conservation and Audit",
+              "folder": "Energy Conservation and Audit",
+              "type": "normal"
+            },
+            {
+              "id": "open-electives-coe",
+              "name": "Open Electives / COE",
+              "folder": "Open Electives - COE",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-basic",
+                  "name": "Artificial Intelligence (Basic)",
+                  "folder": "Artificial Intelligence (Basic)"
+                },
+                {
+                  "id": "internet-of-things-basic",
+                  "name": "Internet of Things (Basic)",
+                  "folder": "Internet of Things (Basic)"
+                },
+                {
+                  "id": "drone-technology-basic",
+                  "name": "Drone Technology (Basic)",
+                  "folder": "Drone Technology (Basic)"
+                },
+                {
+                  "id": "3d-printing-and-design-basic",
+                  "name": "3D Printing and Design (Basic)",
+                  "folder": "3D Printing and Design (Basic)"
+                },
+                {
+                  "id": "industrial-automation-basic",
+                  "name": "Industrial Automation (Basic)",
+                  "folder": "Industrial Automation (Basic)"
+                },
+                {
+                  "id": "electric-vehicle-basic",
+                  "name": "Electric Vehicle (Basic)",
+                  "folder": "Electric Vehicle (Basic)"
+                },
+                {
+                  "id": "robotics-basic",
+                  "name": "Robotics (Basic)",
+                  "folder": "Robotics (Basic)"
+                },
+                {
+                  "id": "transformer-manufacturing-and-repairing-basic",
+                  "name": "Transformer Manufacturing and Repairing (Basic)",
+                  "folder": "Transformer Manufacturing and Repairing (Basic)"
+                },
+                {
+                  "id": "optical-fiber-and-5g-communication-basic",
+                  "name": "Optical Fiber and 5G Communication (Basic)",
+                  "folder": "Optical Fiber and 5G Communication (Basic)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "subjects": [
+            {
+              "id": "utilization-of-electrical-energy",
+              "name": "Utilization of Electrical Energy",
+              "folder": "Utilization of Electrical Energy",
+              "type": "normal"
+            },
+            {
+              "id": "electrical-installation-testing-and-commissioning",
+              "name": "Electrical Installation, Testing and Commissioning",
+              "folder": "Electrical Installation, Testing and Commissioning",
+              "type": "normal"
+            },
+            {
+              "id": "programme-electives",
+              "name": "Programme Electives",
+              "folder": "Programme Electives",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "data-communication",
+                  "name": "Data Communication",
+                  "folder": "Data Communication"
+                },
+                {
+                  "id": "industrial-drives",
+                  "name": "Industrial Drives",
+                  "folder": "Industrial Drives"
+                },
+                {
+                  "id": "electrification-of-building-complexes",
+                  "name": "Electrification of Building Complexes",
+                  "folder": "Electrification of Building Complexes"
+                }
+              ]
+            },
+            {
+              "id": "open-electives-coe",
+              "name": "Open Electives / COE",
+              "folder": "Open Electives - COE",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-advanced",
+                  "name": "Artificial Intelligence (Advanced)",
+                  "folder": "Artificial Intelligence (Advanced)"
+                },
+                {
+                  "id": "internet-of-things-advanced",
+                  "name": "Internet of Things (Advanced)",
+                  "folder": "Internet of Things (Advanced)"
+                },
+                {
+                  "id": "drone-technology-advanced",
+                  "name": "Drone Technology (Advanced)",
+                  "folder": "Drone Technology (Advanced)"
+                },
+                {
+                  "id": "3d-printing-and-design-advanced",
+                  "name": "3D Printing and Design (Advanced)",
+                  "folder": "3D Printing and Design (Advanced)"
+                },
+                {
+                  "id": "industrial-automation-advanced",
+                  "name": "Industrial Automation (Advanced)",
+                  "folder": "Industrial Automation (Advanced)"
+                },
+                {
+                  "id": "electric-vehicle-advanced",
+                  "name": "Electric Vehicle (Advanced)",
+                  "folder": "Electric Vehicle (Advanced)"
+                },
+                {
+                  "id": "robotics-advanced",
+                  "name": "Robotics (Advanced)",
+                  "folder": "Robotics (Advanced)"
+                },
+                {
+                  "id": "transformer-manufacturing-and-repairing-advanced",
+                  "name": "Transformer Manufacturing and Repairing (Advanced)",
+                  "folder": "Transformer Manufacturing and Repairing (Advanced)"
+                },
+                {
+                  "id": "optical-fiber-and-5g-communication-advanced",
+                  "name": "Optical Fiber and 5G Communication (Advanced)",
+                  "folder": "Optical Fiber and 5G Communication (Advanced)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electronics",
+      "name": "Electronics Engineering",
+      "folder": "Electronics Engineering",
+      "tagline": "Circuits, signals & communication systems",
+      "accent": "#5bc49f",
+      "icon": "electronics",
+      "semesters": [
+        {
+          "number": 1,
+          "subjects": [
+            {
+              "id": "basic-engg-mathematics",
+              "name": "Basic Engg. Mathematics",
+              "folder": "Basic Engg. Mathematics",
+              "type": "normal"
+            },
+            {
+              "id": "applied-physics-b",
+              "name": "Applied Physics -B",
+              "folder": "Applied Physics -B",
+              "type": "normal"
+            },
+            {
+              "id": "applied-chemistry-b",
+              "name": "Applied Chemistry -B",
+              "folder": "Applied Chemistry -B",
+              "type": "normal"
+            },
+            {
+              "id": "engg-mechanics",
+              "name": "Engg. Mechanics",
+              "folder": "Engg. Mechanics",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "subjects": [
+            {
+              "id": "basic-electronics-engg",
+              "name": "Basic Electronics Engg.",
+              "folder": "Basic Electronics Engg",
+              "type": "normal"
+            },
+            {
+              "id": "electric-circuits-and-machines",
+              "name": "Electric Circuits and Machines",
+              "folder": "Electric Circuits and Machines",
+              "type": "normal"
+            },
+            {
+              "id": "communication-skills-english",
+              "name": "Communication Skills (English)",
+              "folder": "Communication Skills (English)",
+              "type": "normal"
+            },
+            {
+              "id": "applied-mathematics-c",
+              "name": "Applied Mathematics -C",
+              "folder": "Applied Mathematics -C",
+              "type": "normal"
+            },
+            {
+              "id": "fundamentals-of-it-and-c-programming",
+              "name": "Fundamentals of IT and C Programming",
+              "folder": "Fundamentals of IT and C Programming",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "subjects": [
+            {
+              "id": "analog-electronics",
+              "name": "Analog Electronics",
+              "folder": "Analog Electronics",
+              "type": "normal"
+            },
+            {
+              "id": "measuring-instruments-and-sensors",
+              "name": "Measuring Instruments and Sensors",
+              "folder": "Measuring Instruments and Sensors",
+              "type": "normal"
+            },
+            {
+              "id": "digital-electronics",
+              "name": "Digital Electronics",
+              "folder": "Digital Electronics",
+              "type": "normal"
+            },
+            {
+              "id": "principles-of-electronic-communication",
+              "name": "Principles of Electronic Communication",
+              "folder": "Principles of Electronic Communication",
+              "type": "normal"
+            },
+            {
+              "id": "electronic-simulation-software-practice",
+              "name": "Electronic Simulation Software Practice",
+              "folder": "Electronic Simulation Software Practice",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "subjects": [
+            {
+              "id": "linear-integrated-circuit",
+              "name": "Linear Integrated Circuit",
+              "folder": "Linear Integrated Circuit",
+              "type": "normal"
+            },
+            {
+              "id": "microcontroller-and-its-applications",
+              "name": "Microcontroller and its Applications",
+              "folder": "Microcontroller and its Applications",
+              "type": "normal"
+            },
+            {
+              "id": "digital-communication",
+              "name": "Digital Communication",
+              "folder": "Digital Communication",
+              "type": "normal"
+            },
+            {
+              "id": "electronic-equipment-maintenance",
+              "name": "Electronic Equipment Maintenance",
+              "folder": "Electronic Equipment Maintenance",
+              "type": "normal"
+            },
+            {
+              "id": "python-programming",
+              "name": "Python Programming",
+              "folder": "Python Programming",
+              "type": "normal"
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "subjects": [
+            {
+              "id": "industrial-engineering-management",
+              "name": "Industrial Engineering & Management",
+              "folder": "Industrial Engineering & Management",
+              "type": "normal"
+            },
+            {
+              "id": "antennas-and-microwave-engineering",
+              "name": "Antennas and Microwave Engineering",
+              "folder": "Antennas and Microwave Engineering",
+              "type": "normal"
+            },
+            {
+              "id": "automated-control-system-and-plc",
+              "name": "Automated Control System and PLC",
+              "folder": "Automated Control System and PLC",
+              "type": "normal"
+            },
+            {
+              "id": "open-electives-coe",
+              "name": "Open Electives / COE",
+              "folder": "Open Electives - COE",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-basic",
+                  "name": "Artificial Intelligence (Basic)",
+                  "folder": "Artificial Intelligence (Basic)"
+                },
+                {
+                  "id": "internet-of-things-basic",
+                  "name": "Internet of Things (Basic)",
+                  "folder": "Internet of Things (Basic)"
+                },
+                {
+                  "id": "drone-technology-basic",
+                  "name": "Drone Technology (Basic)",
+                  "folder": "Drone Technology (Basic)"
+                },
+                {
+                  "id": "3d-printing-and-design-basic",
+                  "name": "3D Printing and Design (Basic)",
+                  "folder": "3D Printing and Design (Basic)"
+                },
+                {
+                  "id": "industrial-automation-basic",
+                  "name": "Industrial Automation (Basic)",
+                  "folder": "Industrial Automation (Basic)"
+                },
+                {
+                  "id": "electric-vehicle-basic",
+                  "name": "Electric Vehicle (Basic)",
+                  "folder": "Electric Vehicle (Basic)"
+                },
+                {
+                  "id": "robotics-basic",
+                  "name": "Robotics (Basic)",
+                  "folder": "Robotics (Basic)"
+                },
+                {
+                  "id": "transformer-manufacturing-and-repairing-basic",
+                  "name": "Transformer Manufacturing and Repairing (Basic)",
+                  "folder": "Transformer Manufacturing and Repairing (Basic)"
+                },
+                {
+                  "id": "optical-fiber-and-5g-communication-basic",
+                  "name": "Optical Fiber and 5G Communication (Basic)",
+                  "folder": "Optical Fiber and 5G Communication (Basic)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "subjects": [
+            {
+              "id": "data-communication-and-computer-networking",
+              "name": "Data Communication and Computer Networking",
+              "folder": "Data Communication and Computer Networking",
+              "type": "normal"
+            },
+            {
+              "id": "embedded-system",
+              "name": "Embedded System",
+              "folder": "Embedded System",
+              "type": "normal"
+            },
+            {
+              "id": "programme-electives",
+              "name": "Programme Electives",
+              "folder": "Programme Electives",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-machine-learning",
+                  "name": "Artificial Intelligence & Machine Learning",
+                  "folder": "Artificial Intelligence & Machine Learning"
+                },
+                {
+                  "id": "industrial-electronics",
+                  "name": "Industrial Electronics",
+                  "folder": "Industrial Electronics"
+                },
+                {
+                  "id": "biomedical-electronics",
+                  "name": "Biomedical Electronics",
+                  "folder": "Biomedical Electronics"
+                },
+                {
+                  "id": "advance-communication-systems",
+                  "name": "Advance Communication Systems",
+                  "folder": "Advance Communication Systems"
+                }
+              ]
+            },
+            {
+              "id": "open-electives-coe",
+              "name": "Open Electives / COE",
+              "folder": "Open Electives - COE",
+              "type": "special",
+              "electives": [
+                {
+                  "id": "artificial-intelligence-advanced",
+                  "name": "Artificial Intelligence (Advanced)",
+                  "folder": "Artificial Intelligence (Advanced)"
+                },
+                {
+                  "id": "internet-of-things-advanced",
+                  "name": "Internet of Things (Advanced)",
+                  "folder": "Internet of Things (Advanced)"
+                },
+                {
+                  "id": "drone-technology-advanced",
+                  "name": "Drone Technology (Advanced)",
+                  "folder": "Drone Technology (Advanced)"
+                },
+                {
+                  "id": "3d-printing-and-design-advanced",
+                  "name": "3D Printing and Design (Advanced)",
+                  "folder": "3D Printing and Design (Advanced)"
+                },
+                {
+                  "id": "industrial-automation-advanced",
+                  "name": "Industrial Automation (Advanced)",
+                  "folder": "Industrial Automation (Advanced)"
+                },
+                {
+                  "id": "electric-vehicle-advanced",
+                  "name": "Electric Vehicle (Advanced)",
+                  "folder": "Electric Vehicle (Advanced)"
+                },
+                {
+                  "id": "robotics-advanced",
+                  "name": "Robotics (Advanced)",
+                  "folder": "Robotics (Advanced)"
+                },
+                {
+                  "id": "transformer-manufacturing-and-repairing-advanced",
+                  "name": "Transformer Manufacturing and Repairing (Advanced)",
+                  "folder": "Transformer Manufacturing and Repairing (Advanced)"
+                },
+                {
+                  "id": "optical-fiber-and-5g-communication-advanced",
+                  "name": "Optical Fiber and 5G Communication (Advanced)",
+                  "folder": "Optical Fiber and 5G Communication (Advanced)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

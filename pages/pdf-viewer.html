@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Document viewer — SBTE 2.0</title>
+<meta name="description" content="View or download a PDF from SBTE 2.0's notes, PYQ and practical library." />
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+<meta name="theme-color" content="#0a0e13" />
+<link rel="apple-touch-icon" href="/assets/logo.jpg" />
+<link rel="manifest" href="/manifest.json" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SBTE 2.0" />
+<meta property="og:title" content="Document viewer — SBTE 2.0" />
+<meta property="og:description" content="View or download a PDF from SBTE 2.0's notes, PYQ and practical library." />
+<meta property="og:image" content="/assets/logo.jpg" />
+<meta name="twitter:card" content="summary" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/responsive.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+<link rel="stylesheet" href="/css/pdf-viewer.css" />
+</head>
+<body>
+<a class="skip-link" href="#viewer-main">Skip to content</a>
+
+<canvas id="bg-canvas"></canvas>
+<div class="bg-grid"></div>
+
+<header class="site-header" id="site-header"></header>
+
+<nav class="crumb-strip" aria-label="Breadcrumb">
+  <div class="container">
+    <div class="crumb" id="crumb"></div>
+  </div>
+</nav>
+
+<main id="viewer-main">
+  <div class="container">
+    <div class="viewer-toolbar">
+      <div class="viewer-toolbar__title">
+        <!-- static SVG (not app.js's icon() helper) since this markup isn't built by JS -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg>
+        <h1 id="viewer-title">Loading&hellip;</h1>
+      </div>
+      <div class="viewer-toolbar__actions">
+        <a id="viewer-back" class="btn btn--ghost btn--sm stampable" href="/index.html">Back to list</a>
+        <a id="viewer-open" class="btn btn--ghost btn--sm stampable" href="#" target="_blank" rel="noopener">Open in new tab</a>
+        <a id="viewer-download" class="btn btn--primary btn--sm stampable" href="#">Download</a>
+      </div>
+    </div>
+
+    <div class="viewer-frame" id="viewer-frame">
+      <iframe id="viewer-iframe" title="PDF document"></iframe>
+      <div class="viewer-fallback">
+        <p>Your browser can't display embedded PDFs. Use Download or Open in new tab above.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/navigation.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/three-background.js"></script>
+<script src="/js/animations.js"></script>
+<script src="/js/pdf-viewer.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "siteName": "SBTE 2.0",
+  "fullForm": "State Board of Technical Education 2.0",
+  "tagline": "Notes, PYQs & practicals for every branch and semester \u2014 organized like a drawing register, updated the moment a PDF is added.",
+  "logo": "/assets/logo.jpg",
+  "favicon": "/assets/icons/favicon.svg",
+  "semesters": 6,
+  "resourceTypes": [
+    { "id": "notes", "label": "Notes", "description": "Unit-wise study notes", "icon": "notes" },
+    { "id": "pyq", "label": "PYQ", "description": "Previous year question papers", "icon": "pyq" },
+    { "id": "practical", "label": "Practical", "description": "Lab / practical experiment files", "icon": "practical" }
+  ],
+  "footer": {
+    "text": "Built for students, by students."
+  }
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "civil",
+    "name": "Civil Engineering",
+    "tagline": "Structures, surveying & sustainable infrastructure",
+    "accent": "#d4a657",
+    "icon": "civil"
+  },
+  {
+    "id": "cse",
+    "name": "Computer Science and Engineering",
+    "tagline": "Code, data & intelligent systems",
+    "accent": "#3fa9f5",
+    "icon": "cse"
+  },
+  {
+    "id": "mechanical",
+    "name": "Mechanical Engineering",
+    "tagline": "Machines, thermodynamics & manufacturing",
+    "accent": "#e8734a",
+    "icon": "mechanical"
+  },
+  {
+    "id": "electrical",
+    "name": "Electrical Engineering",
+    "tagline": "Power systems, machines & control",
+    "accent": "#f5c542",
+    "icon": "electrical"
+  },
+  {
+    "id": "electronics",
+    "name": "Electronics Engineering",
+    "tagline": "Circuits, signals & communication systems",
+    "accent": "#5bc49f",
+    "icon": "electronics"
+  }
+]

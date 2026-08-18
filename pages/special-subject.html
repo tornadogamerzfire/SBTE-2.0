@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Choose an option — SBTE 2.0</title>
+<meta name="description" content="Choose an elective option to see its notes, PYQ and practicals on SBTE 2.0." />
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+<meta name="theme-color" content="#0a0e13" />
+<link rel="apple-touch-icon" href="/assets/logo.jpg" />
+<link rel="manifest" href="/manifest.json" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SBTE 2.0" />
+<meta property="og:title" content="Choose an option — SBTE 2.0" />
+<meta property="og:description" content="Choose an elective option to see its notes, PYQ and practicals on SBTE 2.0." />
+<meta property="og:image" content="/assets/logo.jpg" />
+<meta name="twitter:card" content="summary" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/responsive.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<canvas id="bg-canvas"></canvas>
+<div class="bg-grid"></div>
+
+<header class="site-header" id="site-header"></header>
+
+<nav class="crumb-strip" aria-label="Breadcrumb">
+  <div class="container">
+    <div class="crumb" id="crumb"></div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <div class="section-head" id="group-head">
+      <span class="eyebrow badge badge--marker">This subject has multiple options</span>
+      <h2 id="group-title" style="margin-top: var(--sp-3);">Loading&hellip;</h2>
+      <p id="group-sub"></p>
+    </div>
+    <div class="grid grid--tight" id="elective-grid" aria-live="polite"></div>
+  </div>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/navigation.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/three-background.js"></script>
+<script src="/js/animations.js"></script>
+<script>
+  async function initSpecialSubjectPage() {
+    const grid = document.getElementById("elective-grid");
+    const crumbEl = document.getElementById("crumb");
+
+    let curriculum;
+    try {
+      curriculum = await Api.getCurriculum();
+    } catch (e) {
+      renderEmptyState(grid, { title: "Couldn't load the curriculum", message: e.message, isError: true, iconName: "alert" });
+      return;
+    }
+
+    const branch = Nav.findBranch(curriculum, Nav.param("branch"));
+    const semester = Nav.findSemester(branch, Nav.param("sem"));
+    const subject = Nav.findSubject(semester, Nav.param("subject"));
+
+    if (!branch || !semester || !subject || subject.type !== "special") {
+      document.getElementById("group-head").style.display = "none";
+      renderEmptyState(grid, {
+        title: "Nothing to show here",
+        message: "That link looks wrong, or this subject doesn't have multiple options. Start again from the semester page.",
+        isError: true, iconName: "alert",
+      });
+      return;
+    }
+
+    document.title = `${subject.name} \u2014 ${branch.name} \u2014 SBTE 2.0`;
+    document.getElementById("group-title").textContent = subject.name;
+    document.getElementById("group-sub").textContent = `Semester ${Nav.romanSemester(semester.number)} \u2014 choose one of ${subject.electives.length} options to see its notes, PYQ and practicals.`;
+    Nav.renderCrumbs(crumbEl, { branch, semester, subject });
+
+    grid.innerHTML = subject.electives.map((elective, i) => `
+      <a class="card stampable" style="--accent:${branch.accent}"
+         href="${Nav.buildUrl('/pages/subjects.html', { branch: branch.id, sem: semester.number, subject: subject.id, elective: elective.id })}">
+        <span class="card__index">${String.fromCharCode(65 + i)}</span>
+        <div class="card__title">${Nav.escapeHtml(elective.name)}</div>
+        <div class="card__foot"><span>Notes &middot; PYQ &middot; Practical</span>${icon("chevron")}</div>
+      </a>`).join("");
+
+    Animate.revealCards("#elective-grid .card");
+  }
+  document.addEventListener("DOMContentLoaded", initSpecialSubjectPage);
+</script>
+</body>
+</html>

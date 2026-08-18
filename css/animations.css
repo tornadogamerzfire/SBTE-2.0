@@ -1,0 +1,76 @@
+/* =========================================================================
+   Motion. One orchestrated hero sequence (driven by js/animations.js +
+   GSAP), calm ambient background, and small, purposeful micro-interactions.
+   Everything here is disabled under prefers-reduced-motion below.
+   ========================================================================= */
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes draw-line {
+  from { stroke-dashoffset: var(--dash, 400); }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.js-reveal { opacity: 0; }
+.js-revealed { animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+.float { animation: float-y 5s ease-in-out infinite; }
+
+/* "Stamp" click ripple — a small ring that expands from the click point,
+   echoing a rubber date-stamp hitting a drawing. Added to elements with
+   class .stampable by js/animations.js. */
+.stamp-ring {
+  position: absolute;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--marker);
+  transform: translate(-50%, -50%) scale(0.9);
+  pointer-events: none;
+  animation: pulse-ring 0.5s ease-out forwards;
+}
+
+.stampable { position: relative; overflow: hidden; }
+
+/* Loading dots for async fetches */
+.dots::after {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  text-align: left;
+  animation: dots 1.2s steps(4, end) infinite;
+}
+@keyframes dots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75%, 100% { content: "..."; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js-reveal { opacity: 1; }
+  #bg-canvas { display: none; }
+}

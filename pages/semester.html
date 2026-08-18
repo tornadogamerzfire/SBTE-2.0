@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Subjects — SBTE 2.0</title>
+<meta name="description" content="Browse subjects for this semester on SBTE 2.0." />
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+<meta name="theme-color" content="#0a0e13" />
+<link rel="apple-touch-icon" href="/assets/logo.jpg" />
+<link rel="manifest" href="/manifest.json" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SBTE 2.0" />
+<meta property="og:title" content="Subjects — SBTE 2.0" />
+<meta property="og:description" content="Browse subjects for this semester on SBTE 2.0." />
+<meta property="og:image" content="/assets/logo.jpg" />
+<meta name="twitter:card" content="summary" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/responsive.css" />
+<link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<canvas id="bg-canvas"></canvas>
+<div class="bg-grid"></div>
+
+<header class="site-header" id="site-header"></header>
+
+<nav class="crumb-strip" aria-label="Breadcrumb">
+  <div class="container">
+    <div class="crumb" id="crumb"></div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container">
+    <div class="section-head" id="sem-head">
+      <span class="eyebrow">Step 3 of 4</span>
+      <h2 id="sem-title">Loading&hellip;</h2>
+      <p id="sem-sub"></p>
+    </div>
+    <div class="grid" id="subject-grid" aria-live="polite"></div>
+  </div>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/navigation.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/three-background.js"></script>
+<script src="/js/animations.js"></script>
+<script>
+  async function initSemesterPage() {
+    const grid = document.getElementById("subject-grid");
+    const crumbEl = document.getElementById("crumb");
+
+    let curriculum;
+    try {
+      curriculum = await Api.getCurriculum();
+    } catch (e) {
+      renderEmptyState(grid, { title: "Couldn't load the curriculum", message: e.message, isError: true, iconName: "alert" });
+      return;
+    }
+
+    const branchId = Nav.param("branch");
+    const branch = Nav.findBranch(curriculum, branchId);
+    const semester = Nav.findSemester(branch, Nav.param("sem"));
+
+    if (!branch || !semester) {
+      document.getElementById("sem-head").style.display = "none";
+      renderEmptyState(grid, {
+        title: "Semester not found",
+        message: "That link looks wrong or out of date. Pick a branch and semester from the start.",
+        isError: true, iconName: "alert",
+      });
+      return;
+    }
+
+    const semLabel = `Semester ${Nav.romanSemester(semester.number)}`;
+    document.title = `${semLabel} \u2014 ${branch.name} \u2014 SBTE 2.0`;
+    document.getElementById("sem-title").textContent = `${branch.name} \u2014 ${semLabel}`;
+    document.getElementById("sem-sub").textContent = `${semester.subjects.length} subjects this semester`;
+    Nav.renderCrumbs(crumbEl, { branch, semester });
+
+    grid.innerHTML = semester.subjects.map((subject, i) => {
+      const isSpecial = subject.type === "special";
+      const href = isSpecial
+        ? Nav.buildUrl("/pages/special-subject.html", { branch: branch.id, sem: semester.number, subject: subject.id })
+        : Nav.buildUrl("/pages/subjects.html", { branch: branch.id, sem: semester.number, subject: subject.id });
+      const foot = isSpecial
+        ? `<span>${subject.electives.length} options</span>${icon("layers")}`
+        : `<span>Notes &middot; PYQ &middot; Practical</span>${icon("chevron")}`;
+
+      return `
+        <a class="card stampable" style="--accent:${branch.accent}" href="${href}">
+          <span class="card__index">${String(i + 1).padStart(2, "0")}</span>
+          <div class="card__title">${Nav.escapeHtml(subject.name)}</div>
+          <div class="card__desc">${isSpecial ? "Multiple options \u2014 pick one to continue" : "Notes, PYQ &amp; practical for this subject"}</div>
+          <div class="card__foot">${foot}</div>
+        </a>`;
+    }).join("");
+
+    Animate.revealCards("#subject-grid .card");
+  }
+  document.addEventListener("DOMContentLoaded", initSemesterPage);
+</script>
+</body>
+</html>
