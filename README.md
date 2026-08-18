@@ -7,7 +7,7 @@
 ```bash
 cd SBTE-2.0
 pip install -r Backend/requirements.txt
-python3 Backend/app.py
+python Backend/app.py
 ```
 
 Then open **http://localhost:5000**.
