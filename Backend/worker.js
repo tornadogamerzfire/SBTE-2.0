@@ -194,7 +194,7 @@ function parseByteRange(rangeHeader, size) {
   if (rangeHeader.includes(",")) return { invalid: true };
 
   const spec = rangeHeader.slice(6).trim();
-  const match = /^(\\d*)-(\\d*)$/.exec(spec);
+const match = /^(\d*)-(\d*)$/.exec(spec);
   if (!match) return { invalid: true };
 
   const startRaw = match[1];
