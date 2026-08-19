@@ -1,11 +1,11 @@
 """
 app.py
 ------
-Entry point. Serves the frontend (index.html, css/, js/, pages/, assets/,
-data/) and mounts the /api blueprint from routes.py.
+Entry point. Serves the isolated frontend (frontend/index.html, css/, js/,
+pages/, assets/, data/) and mounts the /api blueprint from routes.py.
 
 Run with:
-    python3 Backend/app.py
+    python3 backend/app.py
 Then open:
     http://localhost:5000
 """
@@ -13,7 +13,7 @@ import os
 
 from flask import Flask, send_from_directory, jsonify, request
 
-from config import FRONTEND_DIR, ALLOWED_STATIC_DIRS, HOST, PORT, DEBUG
+from config import ROOT_DIR, FRONTEND_DIR, ALLOWED_STATIC_DIRS, HOST, PORT, DEBUG
 from routes import api
 
 app = Flask(__name__, static_folder=None)
@@ -43,15 +43,16 @@ def manifest():
 
 @app.route("/robots.txt")
 def robots():
-    return send_from_directory(FRONTEND_DIR, "robots.txt")
+    # robots.txt is intentionally a root-level deployment file.
+    return send_from_directory(ROOT_DIR, "robots.txt")
 
 
 @app.route("/<path:req_path>")
 def static_files(req_path):
     """
     Serves everything the frontend needs (css/js/assets/pages/data) from
-    the project root, while refusing to serve anything outside an explicit
-    folder whitelist (so Backend/ source and the notes/pyq/practical trees
+    the frontend directory, while refusing to serve anything outside an explicit
+    folder whitelist (so backend/ source and the notes/pyq/practical trees
     are never reachable as plain static files -- PDFs only ever go out
     through the validated /api/pdf route).
     """
@@ -71,8 +72,8 @@ def static_files(req_path):
     directory = os.path.join(FRONTEND_DIR, rel_dir) if rel_dir else FRONTEND_DIR
     response = send_from_directory(directory, filename)
 
-    # data/*.json changes rarely (only when the curriculum is edited) but
-    # should still be revalidated rather than trusted blindly; css/js/assets
+    # frontend/data/*.json changes rarely (only when the curriculum is edited) but
+    # should still be revalidated rather than trusted blindly; frontend css/js/assets
     # only change on redeploy, so a real cache window is safe and speeds up
     # every subsequent page navigation (this is a many-page, no-bundler
     # site, so every nav re-requests these).

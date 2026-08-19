@@ -9,7 +9,7 @@ folders and show them automatically" -- so that's the entire API surface:
   GET /api/health      trivial liveness check
 
 Curriculum browsing (branches/semesters/subjects) is served as plain
-static JSON from /data/*.json since it doesn't change per-request, and
+static JSON from /frontend/data/*.json since it doesn't change per-request, and
 search runs entirely client-side against that same JSON. Keeping the
 server-rendered surface this small means there's very little here that
 can go wrong.

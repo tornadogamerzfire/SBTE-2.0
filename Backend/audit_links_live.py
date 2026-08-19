@@ -16,9 +16,10 @@ import urllib.request
 import urllib.error
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRONTEND = os.path.join(ROOT, "frontend")
 BASE_URL = "http://127.0.0.1:5000"
-HTML_FILES = ["index.html"] + [f"pages/{f}" for f in os.listdir(os.path.join(ROOT, "pages")) if f.endswith(".html")]
-JS_FILES = [f"js/{f}" for f in os.listdir(os.path.join(ROOT, "js")) if f.endswith(".js")]
+HTML_FILES = ["frontend/index.html"] + [f"frontend/pages/{f}" for f in os.listdir(os.path.join(FRONTEND, "pages")) if f.endswith(".html")]
+JS_FILES = [f"frontend/js/{f}" for f in os.listdir(os.path.join(FRONTEND, "js")) if f.endswith(".js")]
 
 SKIP_PREFIXES = ("http://", "https://", "#", "mailto:", "tel:", "/api/")
 # Pages that only make sense with query params -- request them the way the

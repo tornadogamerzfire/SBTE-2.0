@@ -1,18 +1,18 @@
 """
 setup_folders.py
 -----------------
-Creates every notes/ pyq/ practical/ folder described in data/subjects.json.
+Creates every notes/ pyq/ practical/ folder described in frontend/data/subjects.json.
 Safe to run any time: existing folders (and any PDFs already inside them)
 are left completely untouched, only missing folders are created.
 
 Usage:
-    python3 Backend/setup_folders.py
+    python3 backend/setup_folders.py
 """
 import json
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_PATH = os.path.join(ROOT, "data", "subjects.json")
+DATA_PATH = os.path.join(ROOT, "frontend", "data", "subjects.json")
 RESOURCE_FOLDERS = ["notes", "pyq", "practical"]
 
 

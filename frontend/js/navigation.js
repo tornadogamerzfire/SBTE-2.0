@@ -37,7 +37,7 @@ const Nav = (() => {
     return RESOURCE_LABELS[type] || type;
   }
 
-  // --- curriculum lookups (mirror Backend/utils.py, but read the tree the
+  // --- curriculum lookups (mirror backend/utils.py, but read the tree the
   // page already fetched, so no extra request is needed) ---
   function findBranch(curriculum, id) {
     return curriculum.branches.find((b) => b.id === id) || null;

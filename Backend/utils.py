@@ -1,7 +1,7 @@
 """
 utils.py
 --------
-Loads the curriculum (data/subjects.json) and resolves branch/semester/
+Loads the curriculum (frontend/data/subjects.json) and resolves branch/semester/
 subject/elective combinations against it. This is the security boundary
 for the whole backend: every folder path the scanner ever touches is built
 exclusively from fields that came out of this trusted JSON file, never
@@ -17,7 +17,7 @@ from config import CURRICULUM_PATH
 
 @lru_cache(maxsize=1)
 def get_curriculum():
-    """Cached read of data/subjects.json. Restart the server after editing
+    """Cached read of frontend/data/subjects.json. Restart the server after editing
     the curriculum (or call get_curriculum.cache_clear())."""
     with open(CURRICULUM_PATH, "r", encoding="utf-8") as f:
         return json.load(f)

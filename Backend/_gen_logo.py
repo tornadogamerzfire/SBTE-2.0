@@ -51,6 +51,6 @@ chip_y = SIZE - pad - chip_h + 14
 draw.rounded_rectangle([chip_x, chip_y, chip_x + chip_w, chip_y + chip_h], radius=chip_h / 2, fill=MARKER)
 draw.text((chip_x + chip_pad_x - tb[0], chip_y + chip_pad_y - tb[1]), tag, font=mono, fill=INK)
 
-out_path = os.path.join(ROOT, "assets", "logo.jpg")
+out_path = os.path.join(ROOT, "frontend", "assets", "logo.jpg")
 img.save(out_path, quality=93)
 print("Saved", out_path, img.size)

@@ -9,7 +9,8 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-HTML_FILES = ["index.html"] + [f"pages/{f}" for f in os.listdir(os.path.join(ROOT, "pages")) if f.endswith(".html")]
+FRONTEND = os.path.join(ROOT, "frontend")
+HTML_FILES = ["frontend/index.html"] + [f"frontend/pages/{f}" for f in os.listdir(os.path.join(FRONTEND, "pages")) if f.endswith(".html")]
 
 # Things that are legitimately not on-disk files: external URLs, in-page
 # anchors, API routes (dynamic), and mailto/tel links.
@@ -34,7 +35,7 @@ for rel_path in HTML_FILES:
         if ref.startswith(SKIP_PREFIXES):
             continue
         target = ref.split("?")[0].split("#")[0]
-        target_path = os.path.join(ROOT, target.lstrip("/"))
+        target_path = os.path.join(FRONTEND, target.lstrip("/"))
         if not os.path.isfile(target_path):
             problems.append(f"{rel_path}: broken reference '{ref}' -> expected {target_path}")
 
@@ -49,8 +50,8 @@ else:
 # Cross-check: every page/js/css file mentioned by name in js/*.js
 # (Nav.buildUrl / Api targets) also exists.
 print()
-js_dir = os.path.join(ROOT, "js")
-page_names = set(os.listdir(os.path.join(ROOT, "pages")))
+js_dir = os.path.join(FRONTEND, "js")
+page_names = set(os.listdir(os.path.join(FRONTEND, "pages")))
 mentioned_pages = set()
 for fname in os.listdir(js_dir):
     content = open(os.path.join(js_dir, fname)).read()

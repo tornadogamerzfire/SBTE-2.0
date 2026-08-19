@@ -6,8 +6,8 @@
 
 ```bash
 cd SBTE-2.0
-pip install -r Backend/requirements.txt
-python Backend/app.py
+pip install -r backend/requirements.txt
+python backend/app.py
 ```
 
 Then open **http://localhost:5000**.
@@ -40,32 +40,39 @@ notes/Civil Engineering/Semester 5/Open Electives - COE/Artificial Intelligence 
 
 Note that on disk this folder is named **`Open Electives - COE`** (hyphen), not `Open Electives / COE` — a forward slash can't be part of a real folder name on any operating system, so the slash was swapped for a hyphen when the folder tree was generated. The website still displays it as "Open Electives / COE"; only the folder name on disk differs.
 
-If you're not sure which folder a subject maps to, browse to it on the live site first — the breadcrumb and the URL's `subject`/`elective` values correspond directly to `data/subjects.json`.
+If you're not sure which folder a subject maps to, browse to it on the live site first — the breadcrumb and the URL's `subject`/`elective` values correspond directly to `frontend/data/subjects.json`.
 
 ## How it's organized
 
 ```text
 SBTE-2.0/
-├── index.html              Homepage — the 5 branches
-├── manifest.json           Web app manifest (installable on mobile)
-├── robots.txt
-├── pages/                  branch → semester → subject → resource-type → PDF
-├── css/  js/  assets/      Frontend — see "Design" below
-├── data/                   subjects.json (curriculum), branches.json, site-config.json
-├── notes/  pyq/  practical/  Your PDFs go here — see structure above
-└── Backend/                Flask app — see Backend/README.md
+├── frontend/               Complete frontend application
+│   ├── index.html          Homepage — the 5 branches
+│   ├── pages/              branch → semester → subject → resource-type → PDF
+│   ├── css/                Stylesheets
+│   ├── js/                 Frontend JavaScript
+│   ├── assets/             Images, icons and other frontend assets
+│   ├── data/               subjects.json, branches.json, site-config.json
+│   └── manifest.json       Web app manifest
+├── backend/                Flask API/server — see backend/README.md
+├── notes/                  Notes PDF tree
+├── pyq/                    Previous-year-question PDF tree
+├── practical/              Practical PDF tree
+├── robots.txt              Root-level crawler rules
+├── README.md               Project documentation
+└── .gitignore
 ```
 
-The frontend is plain HTML/CSS/JS (no build step, no framework) — every inner page is a static `.html` file that reads its state from the URL's query string (`?branch=civil&sem=1&subject=...`) and renders itself. The only things that ever hit the Python backend are: listing the PDFs in a folder, and streaming one PDF file. Everything else (branch/semester/subject browsing, search) runs off the static `data/*.json` files directly in the browser.
+The frontend is plain HTML/CSS/JS under `frontend/` (no build step, no framework) — every inner page is a static `.html` file that reads its state from the URL's query string (`?branch=civil&sem=1&subject=...`) and renders itself. The only things that ever hit the Python backend are: listing the PDFs in a folder, and streaming one PDF file. Everything else (branch/semester/subject browsing, search) runs off the static `frontend/data/*.json` files directly in the browser.
 
 ## Editing the curriculum
 
-The curriculum (branches, semesters, subjects, electives) lives in one place: `data/subjects.json`, generated from `Backend/build_curriculum.py`. To change it:
+The curriculum (branches, semesters, subjects, electives) lives in one place: `frontend/data/subjects.json`, generated from `backend/build_curriculum.py`. To change it:
 
-1. Edit the branch/semester/subject data inside `Backend/build_curriculum.py`.
-2. Run `python3 Backend/build_curriculum.py` — it rewrites `data/subjects.json` and asserts the subject counts and IDs are all still consistent (it will raise an error rather than write bad data if something doesn't add up).
-3. Run `python3 Backend/setup_folders.py` to create any newly-added subject folders. Existing folders and PDFs are never touched or deleted.
-4. **Restart the Flask server** (`Ctrl+C`, then `python3 Backend/app.py` again). The curriculum is read once and cached in memory for the life of the process, so a running server won't pick up the edit on its own — this is the one thing here that isn't automatic.
+1. Edit the branch/semester/subject data inside `backend/build_curriculum.py`.
+2. Run `python3 backend/build_curriculum.py` — it rewrites `frontend/data/subjects.json` and asserts the subject counts and IDs are all still consistent (it will raise an error rather than write bad data if something doesn't add up).
+3. Run `python3 backend/setup_folders.py` to create any newly-added subject folders. Existing folders and PDFs are never touched or deleted.
+4. **Restart the Flask server** (`Ctrl+C`, then `python3 backend/app.py` again). The curriculum is read once and cached in memory for the life of the process, so a running server won't pick up the edit on its own — this is the one thing here that isn't automatic.
 
 ## Design
 
@@ -77,11 +84,11 @@ The frontend uses a small number of modern CSS features (`color-mix()`, `backdro
 
 ## Production deployment
 
-`python3 Backend/app.py` runs Flask's built-in development server, which is fine for running this on your own machine or a college LAN. If you put this on the public internet, set `SBTE_DEBUG=false` (the interactive debugger it otherwise exposes lets anyone who triggers a server error run code on your machine) and put it behind a real WSGI server such as gunicorn, e.g.:
+`python3 backend/app.py` runs Flask's built-in development server, which is fine for running this on your own machine or a college LAN. If you put this on the public internet, set `SBTE_DEBUG=false` (the interactive debugger it otherwise exposes lets anyone who triggers a server error run code on your machine) and put it behind a real WSGI server such as gunicorn, e.g.:
 
 ```bash
 pip install gunicorn
-gunicorn -w 4 -b 0.0.0.0:5000 --chdir Backend app:app
+gunicorn -w 4 -b 0.0.0.0:5000 --chdir backend app:app
 ```
 
 ## License / credit

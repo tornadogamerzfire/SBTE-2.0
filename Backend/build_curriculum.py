@@ -3,12 +3,12 @@ build_curriculum.py
 --------------------
 Single source of truth for the SBTE 2.0 curriculum. Encodes every branch,
 semester and subject as plain Python data (so it's easy to read and verify
-against the syllabus), then compiles it into data/subjects.json.
+against the syllabus), then compiles it into frontend/data/subjects.json.
 
 Run manually any time the curriculum changes:
-    python3 Backend/build_curriculum.py
+    python3 backend/build_curriculum.py
 
-After editing this file, re-run it, then re-run Backend/setup_folders.py to
+After editing this file, re-run it, then re-run backend/setup_folders.py to
 create any newly-added subject folders (existing folders/PDFs are untouched).
 """
 import json
@@ -16,7 +16,7 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = os.path.join(ROOT, "data")
+DATA_DIR = os.path.join(ROOT, "frontend", "data")
 
 # ---------------------------------------------------------------------------
 # Helpers
