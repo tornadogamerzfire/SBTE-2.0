@@ -1,76 +1,317 @@
-# Backend
+# SBTE 2.0 Production Backend
 
-A small Flask app with exactly two jobs: **scan a folder for PDFs**, and **stream one PDF**. Everything else the site needs (curriculum browsing, search) is static JSON served straight from `../frontend/data/`.
+This directory contains the production Cloudflare Worker API for SBTE 2.0.
+
+The production architecture from the project plan is:
+
+```text
+Cloudflare Pages frontend
+        |
+        | GET /api/*
+        v
+Cloudflare Worker
+        |
+        | R2 binding: SBTE_PDFS
+        v
+Cloudflare R2
+  ├── notes/
+  ├── pyq/
+  └── practical/
+```
+
+The Worker replaces the filesystem-dependent part of the old Flask backend. It does not run Flask, does not read `notes/`, `pyq/`, or `practical/` from the repository, and does not fetch PDFs from GitHub.
 
 ## Files
 
-| File | Role |
+| File | Purpose |
 |---|---|
-| `app.py` | Entry point. Serves the frontend and mounts the API. Run this. |
-| `config.py` | All paths, derived from this file's own location — works no matter what directory you launch it from. |
-| `routes.py` | The entire API: `/api/resources`, `/api/pdf`, `/api/health`. |
-| `utils.py` | Loads `frontend/data/subjects.json` and resolves a branch/semester/subject/elective combination against it. This is the security boundary — see below. |
-| `scanner.py` | Reads a folder's PDFs live, on every request. No caching, no pre-indexing — that's what makes "just drop a PDF in" work. |
-| `build_curriculum.py` | Generates `frontend/data/subjects.json` from hand-written curriculum data. Re-run after editing the curriculum. |
-| `setup_folders.py` | Creates every `notes/pyq/practical` subject folder from `frontend/data/subjects.json`. Safe to re-run any time — never deletes or overwrites anything. |
-| `audit_links.py` | Dev tool: checks every `href`/`src` in the frontend resolves to a real *file on disk*. Fast, no server needed. Not needed to run the site. |
-| `audit_links_live.py` | Dev tool: checks every internal link against the *actual running server*. Needs `python3 app.py` running first. This is the one that matters — a path can exist as a file and still 404 if app.py's routing doesn't happen to serve that exact URL (this caught a real bug: `/index.html` itself, used all over the site as the "home" link, was never actually wired up — only bare `/` was). Run this after any change to routing or to any page's links. |
-| `_gen_logo.py` | One-off script that generated `assets/logo.jpg`. Not needed at runtime. |
+| `worker.js` | Cloudflare Worker implementation and the complete production API |
+| `wrangler.toml` | Wrangler configuration and the `SBTE_PDFS` R2 binding |
+| `README.md` | This deployment/API/security documentation |
 
-A note on how these bugs were found: HTTP status checks, HTML/JS syntax validation, and disk-based link checks all passed while the site still had a blank hero section, a duplicated nav in the header, and six broken "home" links — none of that class of bug is visible to those checks, because they never actually execute the page's JavaScript against a real DOM the way a browser does. Catching them took loading the real pages through jsdom (a JS-engine-level DOM implementation) with the actual CSS and JS files, running them to completion, and inspecting the resulting element state directly — closer to what a real browser produces than anything achievable with curl and a parser alone.
+The older Python files in this directory remain available in the repository for local development unless you explicitly remove them later. This production backend does not depend on them.
 
-## Running it
+## API contract
+
+The frontend API contract is preserved exactly:
+
+### `GET /api/health`
+
+Response:
+
+```json
+{"status":"ok"}
+```
+
+### `GET /api/resources`
+
+Required query parameters:
+
+- `branch`
+- `sem`
+- `subject`
+- `type`
+
+Optional:
+
+- `elective`
+
+Allowed `type` values:
+
+- `notes`
+- `pyq`
+- `practical`
+
+Example:
+
+```text
+/api/resources?branch=civil&sem=1&subject=basic-engg-mathematics&type=notes
+```
+
+Response shape:
+
+```json
+{
+  "type": "notes",
+  "branch": "Civil Engineering",
+  "semester": 1,
+  "subject": "Basic Engg. Mathematics",
+  "elective": null,
+  "count": 2,
+  "files": [
+    {
+      "filename": "Unit 1 - Differential Calculus.pdf",
+      "display_name": "Unit 1 - Differential Calculus",
+      "size_kb": 812.4,
+      "modified": 1755600000
+    }
+  ]
+}
+```
+
+The list is generated live from R2 using an exact prefix, so uploading a new PDF to the correct R2 location makes it appear without rebuilding or redeploying the frontend.
+
+### `GET /api/pdf`
+
+Required query parameters:
+
+- `branch`
+- `sem`
+- `subject`
+- `type`
+- `file`
+
+Optional:
+
+- `elective`
+
+Example:
+
+```text
+/api/pdf?branch=civil&sem=1&subject=basic-engg-mathematics&type=notes&file=Unit%201%20-%20Differential%20Calculus.pdf
+```
+
+The response is the PDF itself with `Content-Type: application/pdf` and `Content-Disposition: inline`, so the browser can open the PDF viewer instead of forcing a download.
+
+Byte-range requests are supported for PDF viewers. Invalid ranges return HTTP 416 with an appropriate `Content-Range` header.
+
+## R2 bucket structure
+
+R2 is object storage, so these are object-key prefixes rather than real filesystem directories.
+
+Normal subject:
+
+```text
+notes/Civil Engineering/Semester 1/Basic Engg. Mathematics/<file>.pdf
+pyq/Civil Engineering/Semester 1/Basic Engg. Mathematics/<file>.pdf
+practical/Civil Engineering/Semester 1/Basic Engg. Mathematics/<file>.pdf
+```
+
+Elective subject:
+
+```text
+notes/Civil Engineering/Semester 5/Open Electives - COE/Artificial Intelligence (Basic)/<file>.pdf
+pyq/Civil Engineering/Semester 5/Open Electives - COE/Artificial Intelligence (Basic)/<file>.pdf
+practical/Civil Engineering/Semester 5/Open Electives - COE/Artificial Intelligence (Basic)/<file>.pdf
+```
+
+Use the exact folder names already represented by the project's curriculum. Do not rename folders casually, because the Worker constructs R2 prefixes from its trusted curriculum mapping.
+
+## Validation and security model
+
+The Worker does not trust request values as filesystem or R2 paths.
+
+For every resource/PDF request it:
+
+1. Validates `type`.
+2. Validates `branch`, `sem`, and `subject` against the trusted curriculum mapping embedded in `worker.js`.
+3. Validates electives against the exact elective list for special subjects.
+4. Rejects an elective on a normal subject.
+5. Builds the R2 prefix only from trusted curriculum folder values.
+6. Allows the requested PDF filename only when it is a single filename component ending in `.pdf`.
+7. Rejects `/`, `\\`, `..`, blank filenames, and non-PDF filenames.
+8. Fetches only the constructed R2 object key.
+9. Never exposes an arbitrary R2 prefix or object key.
+10. Returns JSON for all `/api/*` errors.
+
+HTTP status usage:
+
+| Status | Meaning |
+|---:|---|
+| `200` | Successful API response |
+| `204` | Successful CORS preflight |
+| `400` | Invalid parameters |
+| `404` | Valid request structure but route/context/PDF does not exist |
+| `405` | Unsupported HTTP method |
+| `416` | Invalid/unsatisfiable PDF byte range |
+| `500` | Unexpected Worker/R2 error |
+
+## CORS
+
+Production frontend:
+
+```text
+https://sbte-2-0.pages.dev
+```
+
+Local development origins allowed by the Worker:
+
+```text
+http://localhost:5000
+http://127.0.0.1:5000
+```
+
+The Worker does not use wildcard `Access-Control-Allow-Origin: *`.
+
+The Worker also responds to `OPTIONS` requests for CORS preflight.
+
+## Configure R2
+
+First create the bucket in Cloudflare R2. Bucket names must be lowercase and may contain letters, numbers, and hyphens.
+
+Example:
 
 ```bash
-pip install -r requirements.txt
-python3 app.py
+npx wrangler login
+npx wrangler r2 bucket create sbte-2-0-pdfs
 ```
 
-Environment variables (all optional):
+Then update `backend/wrangler.toml`:
 
-| Variable | Default | Purpose |
-|---|---|---|
-| `SBTE_HOST` | `0.0.0.0` | Interface to bind |
-| `SBTE_PORT` | `5000` | Port |
-| `SBTE_DEBUG` | `true` | Flask debug mode + autoreload. **Set to `false` before exposing this to anyone but yourself** — the debugger allows arbitrary code execution if it's reachable publicly. |
-
-## API
-
-**`GET /api/resources`** — list the PDFs available for one subject.
-Query params: `branch`, `sem`, `subject`, `type` (`notes`/`pyq`/`practical`), and `elective` (only for elective-group subjects).
-
-```
-GET /api/resources?branch=civil&sem=1&subject=basic-engg-mathematics&type=notes
-→ { "branch": "...", "semester": 1, "subject": "...", "count": 2, "files": [ { "filename": "...", "display_name": "...", "size_kb": 812.4, "modified": 1755600000 }, ... ] }
+```toml
+[[r2_buckets]]
+binding = "SBTE_PDFS"
+bucket_name = "sbte-2-0-pdfs"
 ```
 
-**`GET /api/pdf`** — stream one PDF. Same query params as above, plus `file` (the exact filename from `/api/resources`).
+Do not put an R2 access key, secret key, or API token into `worker.js`. The Worker receives the bucket through the R2 binding.
 
-**`GET /api/health`** — `{ "status": "ok" }`.
+## Upload PDF trees to R2
 
-Any other `/api/...` path that doesn't match one of these three always gets a JSON `{"error": "Not found"}` with a 404 status — never an HTML page — so a frontend (or any other API client) never has to guess which content type a failed request came back as.
+The required keys are the paths under:
 
-## Response headers
+```text
+notes/
+pyq/
+practical/
+```
 
-Every response gets three standard hardening headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`) that don't change behavior for a normal visitor. Caching is deliberately split three ways:
+The R2 dashboard can be used for uploads. For large uploads, use Wrangler or another S3-compatible tool.
 
-- `frontend/css/`, `frontend/js/`, `frontend/assets/` — `Cache-Control: public, max-age=3600`. These only change on redeploy, and this is a many-page site with no bundler, so every navigation re-requests them.
-- `frontend/data/*.json` — `Cache-Control: no-cache` (always revalidates via the ETag Flask sets automatically; cheap 304 if unchanged).
-- `/api/resources` and `/api/health` — `Cache-Control: no-store`. These reflect live filesystem state; caching them would directly break the "drop a PDF in, it appears immediately" guarantee.
-- `/api/pdf` is left to Flask's own default `ETag`/`Last-Modified` handling, which is already correct for a file that only changes when someone replaces it.
+After a PDF exists at the correct key, test its corresponding `/api/resources` endpoint. No frontend build is required for resource discovery.
 
-## Why the API surface is this small
+## Local Worker testing
 
-Per the brief, the backend's job is specifically to scan PDFs from folders and serve them automatically. Branch/semester/subject browsing and search don't need a server round-trip — the frontend fetches `frontend/data/subjects.json` once and does all of that client-side. Keeping the server-rendered surface to two real routes means there's very little here that can break.
+From the `backend/` directory, with Wrangler installed:
 
-## Security model
+```bash
+npx wrangler dev
+```
 
-Every value in a request (`branch`, `subject`, `elective`, `file`, ...) is either:
+The local Worker should expose the API on the Wrangler development URL.
 
-1. **Looked up against `frontend/data/subjects.json`** (`utils.resolve_context`) — if it doesn't match a known branch/semester/subject/elective exactly, the request 404s before anything is read from disk. The actual folder path used is always built from the *matched entry's* trusted `folder` field, never from the raw request string.
-2. **Re-verified with `os.path.realpath`** (`scanner._safe_join`, `scanner.resolve_pdf_path`) to confirm the resolved path is still inside the intended `notes/`/`pyq/`/`practical/` directory, as a second independent check.
-3. For `file` specifically: rejected outright if it contains `/`, `\`, or `..`, and rejected unless its extension is `.pdf`.
+Test health:
 
-The static file server (`app.py`) only serves from an explicit whitelist of top-level folders (frontend `css`, `js`, `assets`, `pages`, `data`) — `backend/` itself and the `notes`/`pyq`/`practical` trees are never reachable as plain static files, only through the validated `/api/pdf` route.
+```bash
+curl http://127.0.0.1:8787/api/health
+```
 
-This was tested directly (path traversal via `file=`, `..` in a branch name, mismatched branch/semester/subject/elective combinations, wrong resource type, non-PDF extensions) — all correctly rejected with 400/404 rather than exposing anything outside the intended folders.
+Test a resource list:
+
+```bash
+curl "http://127.0.0.1:8787/api/resources?branch=civil&sem=1&subject=basic-engg-mathematics&type=notes"
+```
+
+Test a PDF:
+
+```bash
+curl -I "http://127.0.0.1:8787/api/pdf?branch=civil&sem=1&subject=basic-engg-mathematics&type=notes&file=Unit%201%20-%20Differential%20Calculus.pdf"
+```
+
+The exact local port may differ depending on Wrangler's output.
+
+For a local Worker that should use a remote R2 bucket, use the Wrangler remote/R2 configuration appropriate to your Cloudflare account. Do not commit secrets.
+
+## Deploy
+
+From `backend/`:
+
+```bash
+npx wrangler deploy
+```
+
+Wrangler reads `wrangler.toml`, binds `SBTE_PDFS`, and deploys `worker.js`.
+
+After deployment, Cloudflare will provide the Worker URL, typically similar to:
+
+```text
+https://sbte-2-0-api.<your-subdomain>.workers.dev
+```
+
+Use the actual URL shown by Wrangler. Do not guess it.
+
+## Frontend connection
+
+The current frontend still uses the relative API base:
+
+```js
+const API_BASE = "/api";
+```
+
+Do not hardcode a guessed Worker URL into the frontend before the Worker has actually been deployed.
+
+After the Worker is deployed and verified, update the frontend API base to the real Worker origin. That is a separate frontend change and is intentionally not included in this backend-only package.
+
+## Production checklist
+
+Before switching the public frontend to this Worker:
+
+- Create the R2 bucket.
+- Upload `notes/`, `pyq/`, and `practical/` object keys to R2.
+- Replace the bucket placeholder in `wrangler.toml`.
+- Run `npx wrangler dev` and verify the three API endpoints.
+- Deploy with `npx wrangler deploy`.
+- Verify the deployed `/api/health`.
+- Verify at least one `/api/resources` query for each resource type.
+- Verify `/api/pdf` opens a real PDF.
+- Verify an invalid branch/subject/elective is rejected.
+- Verify a traversal filename such as `../secret.pdf` is rejected.
+- Upload one additional PDF to an existing R2 prefix and confirm it appears in `/api/resources` without redeploying.
+
+## Important scope boundary
+
+This Worker is intentionally an API only.
+
+It does not:
+
+- serve the frontend HTML/CSS/JS;
+- serve repository files;
+- serve arbitrary R2 objects;
+- upload files;
+- delete files;
+- process PDFs;
+- run OCR;
+- authenticate users;
+- use a database;
+- require Flask/FastAPI/Express;
+- fetch curriculum data from GitHub at runtime.

@@ -1,0 +1,11 @@
+# Cloudflare Wrangler configuration for the SBTE 2.0 production API.
+# Replace the R2 bucket placeholder after creating the real bucket.
+# This file intentionally has no npm/package dependencies.
+
+name = "sbte-2-0-api"
+main = "worker.js"
+compatibility_date = "2026-08-19"
+
+[[r2_buckets]]
+binding = "SBTE_PDFS"
+bucket_name = "REPLACE_WITH_REAL_BUCKET_NAME"
